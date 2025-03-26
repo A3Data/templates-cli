@@ -17,55 +17,59 @@
       lib = pkgs.lib;
       f = name: import ./templates/${name}/default.nix { inherit pkgs lib inputs; };
       v = name: import ./templates/${name}/variables.nix;
-
-      testing = "batch";
     in
     {
       packages.${system} = {
-        default = (f testing) (v testing);
+        default = (f "poc") ({ });
         batch = f "batch";
         poc = f "poc";
+
       };
-      devShells.${system}.default = pkgs.mkShell {
-        buildInputs = with pkgs; [
-          (writeShellScriptBin "feml" ''
-            # Check if an argument was provided
-            if [ $# -lt 1 ]; then
-              echo "Usage: feml <template-name> '<nix-args>'"
-              echo "Example: feml batch '{\"projectName\":\"My Project\";\"description\":\"Project description\";\"version\":\"1.0\";}'"
-              exit 1
-            fi
+      devShells.${system}.default =
+        let
+          # templateRepo = "github:andre-brandao/demo/a3";
+          templateRepo = "path:${self}";
+        in
+        pkgs.mkShell {
+          buildInputs = with pkgs; [
+            (writeShellScriptBin "feml" ''
+              # Check if an argument was provided
+              if [ $# -lt 1 ]; then
+                echo "Usage: feml <template-name> '<nix-args>'"
+                echo "Example: feml batch '{\"projectName\":\"My Project\";\"description\":\"Project description\";\"version\":\"1.0\";}'"
+                exit 1
+              fi
 
-            # Use the first argument as the selected function, second as args
-            nix-build --expr "
-              with import <nixpkgs> {};
-              let
-                template = builtins.getFlake \"github:andre-brandao/demo/a3\";
-                args = $2;
-              in
-              template.packages.x86_64-linux.$1 args
-            "
+              # Use the first argument as the selected function, second as args
+              nix-build --expr "
+                with import <nixpkgs> {};
+                let
+                  template = builtins.getFlake \"${templateRepo}\";
+                  args = $2;
+                in
+                template.packages.x86_64-linux.$1 args
+              "
 
-            # Check if the build was successful
-            if [ -e result ]; then
-              # Copy the content of result to the current directory
-              mkdir -p $1
-              cp -r result/* ./$1
-              
-              # Delete the result symlink
-              rm result
-              
-              echo "Build successful. Files copied to current directory."
-            else
-              echo "Build failed."
-              exit 1
-            fi
-          '')
+              # Check if the build was successful
+              if [ -e result ]; then
+                # Copy the content of result to the current directory
+                mkdir -p $1
+                cp -r result/* ./$1
+                
+                # Delete the result symlink
+                rm result
+                
+                echo "Build successful. Files copied to current directory."
+              else
+                echo "Build failed."
+                exit 1
+              fi
+            '')
 
-        ];
-        shellHook = ''
-          echo "DevShell ready. Run 'feml' to build the repository."
-        '';
-      };
+          ];
+          shellHook = ''
+            echo "DevShell ready. Run 'feml' to build the repository."
+          '';
+        };
     };
 }

@@ -1,8 +1,19 @@
 { pkgs, lib, inputs }:
-config:
+args:
+let
+  finalArgs = args // {
+    projectName = args.projectName or "Demo da daily de titulo pro README";
+    description = args.description or "Esse é um projeto demo da daily de titulo pro README e outros patches";
+    version = args.version or "1.0";
+    options = args.options or {
+      deleteBase24 = false;
+    };
+  };
+  inherit (finalArgs) projectName description version options;
+in
 pkgs.stdenv.mkDerivation {
-  pname = config.projectName;
-  version = config.version or "1.0";
+  pname = projectName;
+  version = "1.0";
   src = pkgs.fetchFromGitHub {
     owner = "andre-brandao";
     repo = "color-schemes";
@@ -12,7 +23,7 @@ pkgs.stdenv.mkDerivation {
   patches =
     [    ]
     ++ (
-      if config.options.deleteBase24 then
+      if options.deleteBase24 then
         [
           (pkgs.fetchpatch {
             url = "https://patch-diff.githubusercontent.com/raw/andre-brandao/color-schemes/pull/1.patch";
@@ -26,7 +37,7 @@ pkgs.stdenv.mkDerivation {
   postPatch = ''
     substituteInPlace README.md --replace-fail \
       "tinted-schemes" \
-      "${config.projectName}"
+      "${projectName}"
   '';
   installPhase = ''
     mkdir -p $out
