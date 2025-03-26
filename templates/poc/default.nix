@@ -1,4 +1,4 @@
-{ pkgs, lib }:
+{ pkgs, lib, inputs }:
 config:
 pkgs.stdenv.mkDerivation {
   pname = config.projectName;

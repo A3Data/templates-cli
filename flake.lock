@@ -1,5 +1,21 @@
 {
   "nodes": {
+    "batch": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1743002481,
+        "narHash": "sha256-QIA0p7KshOO+cHrQzXyZY+1M33D6XRDkP7NCKp5PY4M=",
+        "owner": "A3DAndre",
+        "repo": "templates",
+        "rev": "337c1677f377e640da648f1b37e9b564833dbf91",
+        "type": "github"
+      },
+      "original": {
+        "owner": "A3DAndre",
+        "repo": "templates",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1742889210,
@@ -18,6 +34,7 @@
     },
     "root": {
       "inputs": {
+        "batch": "batch",
         "nixpkgs": "nixpkgs"
       }
     }

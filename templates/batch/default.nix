@@ -1,14 +1,15 @@
-{ pkgs, lib }:
+{ pkgs, lib, inputs }:
 config:
 pkgs.stdenv.mkDerivation {
   pname = config.projectName;
   version = config.version or "1.0";
-  src = pkgs.fetchFromGitHub {
-    owner = "A3DAndre";
-    repo = "templates";
-    rev = "main";
-    sha256 = "sha256-QIA0p7KshOO+cHrQzXyZY+1M33D6XRDkP7NCKp5PY4M=";
-  };
+  # src = pkgs.fetchFromGitHub {
+  #   owner = "A3DAndre";
+  #   repo = "templates";
+  #   rev = "main";
+  #   sha256 = "sha256-QIA0p7KshOO+cHrQzXyZY+1M33D6XRDkP7NCKp5PY4M=";
+  # };
+  src = inputs.batch;
   patches = [];
   postPatch = ''
     substituteInPlace README.md --replace-fail \
