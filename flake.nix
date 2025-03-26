@@ -27,11 +27,11 @@
       };
       devShells.${system}.default = pkgs.mkShell {
         buildInputs = with pkgs; [
-            (writeShellScriptBin "feml" ''
+            (writeShellScriptBin  "feml" ''
 # Check if an argument was provided
 if [ $# -lt 1 ]; then
-  echo "Usage: $0 'json_args'"
-  echo "Example: $0 '{\"projectName\":\"My Project\",\"description\":\"Project description\",\"version\":\"1.0\"}'"
+  echo "Usage: feml <template-name> '<nix-args>'"
+  echo "Example: feml batch '{\"projectName\":\"My Project\",\"description\":\"Project description\",\"version\":\"1.0\"}'"
   exit 1
 fi
 
