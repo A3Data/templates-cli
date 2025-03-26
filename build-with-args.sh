@@ -3,11 +3,9 @@ nix-build --expr '
   let
     template = import ./templates/batch/default.nix { inherit pkgs lib; };
     args = {
-      projectName = "demo-da-daily2";
+      projectName = "Demo da daily de titulo pro README";
+      description = "Esse é um projeto demo da daily de titulo pro README e outros patches";
       version = "1.0";
-      includeModules = {
-        deleteBase24 = false;
-      };
     };
   in
   template args
