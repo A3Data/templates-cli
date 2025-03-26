@@ -1,8 +1,5 @@
 {
-  projectName = "batch";
-  projectDescription = "Template Deploy Batch";
+  projectName = "Demo da daily de titulo pro README";
+  description = "Esse é um projeto demo da daily de titulo pro README e outros patches";
   version = "1.0";
-  includeModules = {
-    deleteBase24 = true;
-  };
 }

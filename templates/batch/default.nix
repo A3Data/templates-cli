@@ -25,7 +25,7 @@ pkgs.stdenv.mkDerivation {
 
     substituteInPlace README.md --replace-fail \
       "Este repositório apresenta um pipeline de Machine Learning completo utilizando o dataset Iris. Ele cobre as etapas de download de dados, pré-processamento, treinamento de modelos e predição. Nesse repositório também estão implementadas as melhores práticas e diversas outras features." \
-      "${config.projectDescription}"
+      "${config.description}"
   '';
 
   #  ++ (if config.includeModules.deleteBase24 then [ ./deleteBase24.patch ] else [ ]);
