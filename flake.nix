@@ -27,9 +27,6 @@
       };
       devShells.${system}.default = pkgs.mkShell {
         buildInputs = with pkgs; [
-          (writeShellScriptBin "build-batch" ''
-            nix build .\#packages.x86_64-linux.default
-          '')
             (writeShellScriptBin "cli" ''
 # Check if an argument was provided
 if [ $# -lt 1 ]; then
