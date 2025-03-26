@@ -9,31 +9,32 @@ pkgs.stdenv.mkDerivation {
     rev = "main";
     sha256 = "sha256-QIA0p7KshOO+cHrQzXyZY+1M33D6XRDkP7NCKp5PY4M=";
   };
-  # patches = [
-  #   (pkgs.writeText "readme-project-name.patch" ''
-  #     From d161e7932c7a2aa44f099ba05498e2cd7ca550b5 Mon Sep 17 00:00:00 2001
-  #     From: andre-brandao <82166576+andre-brandao@users.noreply.github.com>
-  #     Date: Wed, 26 Mar 2025 00:10:12 -0300
-  #     Subject: [PATCH] Update project name in README
+  patches = [
+    #  ## Descrição
+    #  '')
+    # (pkgs.fetchpatch {
+    #   url = "https://patch-diff.githubusercontent.com/raw/A3DAndre/templates/pull/1.patch";
+    #   sha256 = "sha256-FNOaOeZRXoOy9qj2VyjtFs/tCm1mwQjyMaasarEABqQ=";
+    # })
 
-  #     ---
-  #      README.md | 2 +-
-  #      1 file changed, 1 insertion(+), 1 deletion(-)
+  ];
+  postPatch = ''
+    substituteInPlace README.md --replace-fail \
+      "Template Deploy Batch" \
+      "${config.projectName}"
 
-  #     diff --git a/README.md b/README.md
-  #     index 818a9e9..a13fc24 100644
-  #     --- a/README.md
-  #     +++ b/README.md
-  #     @@ -1,4 +1,4 @@
-  #     -# tinted-schemes
-  #     +# ${config.projectName}
+    substituteInPlace README.md --replace-fail \
+      "Este repositório apresenta um pipeline de Machine Learning completo utilizando o dataset Iris. Ele cobre as etapas de download de dados, pré-processamento, treinamento de modelos e predição. Nesse repositório também estão implementadas as melhores práticas e diversas outras features." \
+      "${config.projectDescription}"
+  '';
 
-  #      Scheme families:
-  #   '')
+  #  ++ (if config.includeModules.deleteBase24 then [ ./deleteBase24.patch ] else [ ]);
+  phases = [
+    "unpackPhase"
+    "patchPhase"
+    "installPhase"
+  ];
 
-  # ] ++ (if config.includeModules.deleteBase24 then [ ./deleteBase24.patch ] else [ ]);
-  phases = [ "unpackPhase" "patchPhase" "installPhase" ];
-  
   installPhase = ''
     mkdir -p $out
     cp -r . $out/
