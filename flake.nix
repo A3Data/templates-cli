@@ -27,7 +27,7 @@
       };
       devShells.${system}.default = pkgs.mkShell {
         buildInputs = with pkgs; [
-            (writeShellScriptBin "cli" ''
+            (writeShellScriptBin "feml" ''
 # Check if an argument was provided
 if [ $# -lt 1 ]; then
   echo "Usage: $0 'json_args'"
@@ -63,7 +63,7 @@ fi
 
         ];
         shellHook = ''
-          echo "DevShell ready. Run 'build-batch' to build the repository."
+          echo "DevShell ready. Run 'feml' to build the repository."
         '';
       };
     };
