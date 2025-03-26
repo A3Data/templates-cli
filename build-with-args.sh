@@ -1,7 +1,7 @@
 nix-build --expr '
   with import <nixpkgs> {};
   let
-    template = import ./templates/batch/default.nix { inherit pkgs lib; };
+    template = import ./templates/poc/default.nix { inherit pkgs lib; };
     args = {
       projectName = "Demo da daily de titulo pro README";
       description = "Esse é um projeto demo da daily de titulo pro README e outros patches";

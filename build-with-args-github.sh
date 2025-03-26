@@ -8,5 +8,5 @@ nix-build --expr '
       version = "1.0";
     };
   in
-  template.packages.x86_64-linux.template1 args
+  template.packages.x86_64-linux.batch args
 '
