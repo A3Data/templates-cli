@@ -9,15 +9,11 @@
       system = "x86_64-linux";
       pkgs = import nixpkgs { inherit system; };
       lib = pkgs.lib;
-
       f = name: import ./templates/${name}/default.nix { inherit pkgs lib; };
-      batch = import ./templates/batch/default.nix { inherit pkgs lib; };
-
     in
     {
       packages.${system} = {
         default = (f "poc") (import ./templates/poc/variables.nix);
-        # batch = batch;
         batch = f "batch";
         poc = f "proof-of-concept";
       };

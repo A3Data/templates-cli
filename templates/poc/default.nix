@@ -10,13 +10,7 @@ pkgs.stdenv.mkDerivation {
     sha256 = "sha256-WtroUX4eILFD+2Y5XKF/sNcQQ1KrLrIyLjm5cr6EOEU=";
   };
   patches =
-    [
-      # (pkgs.fetchpatch {
-      #   url = "https://patch-diff.githubusercontent.com/raw/andre-brandao/color-schemes/pull/1.patch";
-      #   sha256 = "sha256-FNOaOeZRXoOy9qj2VyjtFs/tCm1mwQjyMaasarEABqQ=";
-      # })
-
-    ]
+    [    ]
     ++ (
       if config.options.deleteBase24 then
         [

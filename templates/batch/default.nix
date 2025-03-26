@@ -9,15 +9,7 @@ pkgs.stdenv.mkDerivation {
     rev = "main";
     sha256 = "sha256-QIA0p7KshOO+cHrQzXyZY+1M33D6XRDkP7NCKp5PY4M=";
   };
-  patches = [
-    #  ## Descrição
-    #  '')
-    # (pkgs.fetchpatch {
-    #   url = "https://patch-diff.githubusercontent.com/raw/A3DAndre/templates/pull/1.patch";
-    #   sha256 = "sha256-FNOaOeZRXoOy9qj2VyjtFs/tCm1mwQjyMaasarEABqQ=";
-    # })
-
-  ];
+  patches = [];
   postPatch = ''
     substituteInPlace README.md --replace-fail \
       "Template Deploy Batch" \
