@@ -16,14 +16,15 @@
       pkgs = import nixpkgs { inherit system; };
       lib = pkgs.lib;
       f = name: import ./templates/${name}/default.nix { inherit pkgs lib inputs; };
+      v = name: import ./templates/${name}/variables.nix;
 
       testing = "batch";
     in
     {
       packages.${system} = {
-        default = (f testing) (import ./templates/${testing}/variables.nix);
+        default = (f testing) (v testing);
         batch = f "batch";
-        poc = f "proof-of-concept";
+        poc = f "poc";
       };
       devShells.${system}.default = pkgs.mkShell {
         buildInputs = with pkgs; [
