@@ -2,7 +2,7 @@
 # Instalation
 
 ```bash
-nix develop github:andre-brandao/demo/a3
+nix develop github:andre-brandao/demo/a3 --refresh
 ```
 
 

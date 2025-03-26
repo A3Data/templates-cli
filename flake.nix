@@ -31,7 +31,7 @@
 # Check if an argument was provided
 if [ $# -lt 1 ]; then
   echo "Usage: feml <template-name> '<nix-args>'"
-  echo "Example: feml batch '{\"projectName\":\"My Project\",\"description\":\"Project description\",\"version\":\"1.0\"}'"
+  echo "Example: feml batch '{\"projectName\":\"My Project\";\"description\":\"Project description\";\"version\":\"1.0\";}'"
   exit 1
 fi
 
