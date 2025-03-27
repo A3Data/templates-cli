@@ -24,6 +24,8 @@
         batch = f "batch";
         poc = f "poc";
 
+        web = import ./uiv2 {inherit pkgs;};
+
       };
       devShells.${system}.default =
         let
@@ -32,6 +34,7 @@
         in
         pkgs.mkShell {
           buildInputs = with pkgs; [
+
             (writeShellScriptBin "a3-t" ''
               # Check if an argument was provided
               if [ $# -lt 1 ]; then
