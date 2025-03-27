@@ -9,7 +9,7 @@ nix develop github:andre-brandao/demo/a3 --refresh
 ## Usage
 
 ```bash
-cli batch '{                                                                                      nix-shell-env
+a3-t batch '{                                                                            
   projectName = "Demo de Template Batch";
   description = "Demo de Template Batch";
   version = "1.0";

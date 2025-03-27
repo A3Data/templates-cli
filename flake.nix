@@ -32,11 +32,11 @@
         in
         pkgs.mkShell {
           buildInputs = with pkgs; [
-            (writeShellScriptBin "feml" ''
+            (writeShellScriptBin "a3-t" ''
               # Check if an argument was provided
               if [ $# -lt 1 ]; then
-                echo "Usage: feml <template-name> '<nix-args>'"
-                echo "Example: feml batch '{\"projectName\":\"My Project\";\"description\":\"Project description\";\"version\":\"1.0\";}'"
+                echo "Usage: a3-t <template-name> '<nix-args>'"
+                echo "Example: a3-t batch '{\"projectName\":\"My Project\";\"description\":\"Project description\";\"version\":\"1.0\";}'"
                 exit 1
               fi
 
