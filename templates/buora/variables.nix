@@ -1,10 +1,15 @@
 {
-  projectName = "Demo da daily de titulo pro README";
+  projectName = "Rogerio";
   description =
     "Esse é um projeto demo da daily de titulo pro README e outros patches";
   version = "1.0";
   options = {
-    includeFolders =
-      [ "agent1" "fn_authorizeers" "fn_conversation_db" "frontend" ];
-  };
+      includeDocs = false;
+      includeFrontend = false;
+      includeTerraform = false;
+      
+      includeAgent1 = true;
+      includeFnAuthorizers = false;
+      includeFnConversationDb = true;
+    };
 }
