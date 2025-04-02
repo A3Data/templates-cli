@@ -20,9 +20,10 @@
     in
     {
       packages.${system} = {
-        default = (f "poc") ({ });
+        default = (f "buora") (v "buora");
         batch = f "batch";
         poc = f "poc";
+        buora = f "buora";
 
         web = import ./uiv2 {inherit pkgs;};
 
