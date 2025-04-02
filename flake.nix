@@ -1,5 +1,6 @@
 {
-  description = "Flake for building the color-schemes repository with selected modules";
+  description =
+    "Flake for building the color-schemes repository with selected modules";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
@@ -7,34 +8,47 @@
       url = "github:A3DAndre/templates";
       flake = false;
     };
+
+    buora = {
+      url = "git+ssh://git@github.com/A3Data/buora-oficial.git?ref=main";
+      flake = false;
+    };
+
+    buora_infra = {
+      url =
+        "git+ssh://git@github.com/A3Data/buora_infra.git?ref=refact/clear-buora-lambda";
+      flake = false;
+    };
+
   };
 
-  outputs =
-    { self, nixpkgs, ... }@inputs:
+  outputs = { self, nixpkgs, ... }@inputs:
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs { inherit system; };
       lib = pkgs.lib;
-      f = name: import ./templates/${name}/default.nix { inherit pkgs lib inputs; };
+      f = name:
+        import ./templates/${name}/default.nix { inherit pkgs lib inputs; };
       v = name: import ./templates/${name}/variables.nix;
-    in
-    {
+    in {
       packages.${system} = {
         default = (f "buora") (v "buora");
         batch = f "batch";
         poc = f "poc";
         buora = f "buora";
+        tBuora =
+          (import ./templates/buora/default.nix { inherit pkgs lib inputs; })
+          (v "buora");
 
-        web = import ./uiv2 {inherit pkgs;};
+        web = import ./uiv2 { inherit pkgs; };
 
       };
-      devShells.${system}.default =
-        let
-          # templateRepo = "github:andre-brandao/demo/a3";
-          templateRepo = "path:${self}";
-        in
-        pkgs.mkShell {
-          buildInputs = with pkgs; [
+      devShells.${system}.default = let
+        # templateRepo = "github:andre-brandao/demo/a3";
+        templateRepo = "path:${self}";
+      in pkgs.mkShell {
+        buildInputs = with pkgs;
+          [
 
             (writeShellScriptBin "a3-t" ''
               # Check if an argument was provided
@@ -71,9 +85,9 @@
             '')
 
           ];
-          shellHook = ''
-            echo "DevShell ready. Run 'feml' to build the repository."
-          '';
-        };
+        shellHook = ''
+          echo "DevShell ready. Run 'feml' to build the repository."
+        '';
+      };
     };
 }

@@ -16,13 +16,47 @@
         "type": "github"
       }
     },
+    "buora": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1738588059,
+        "narHash": "sha256-bXmbTsuMeMKIdRLXc93TstLAVjDkuROumPS+AM6/Hmg=",
+        "ref": "main",
+        "rev": "9d7570fd484e9c5dedbc0da7f0be212d802b556f",
+        "revCount": 14,
+        "type": "git",
+        "url": "ssh://git@github.com/A3Data/buora-oficial.git"
+      },
+      "original": {
+        "ref": "main",
+        "type": "git",
+        "url": "ssh://git@github.com/A3Data/buora-oficial.git"
+      }
+    },
+    "buora_infra": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1742492627,
+        "narHash": "sha256-jXtAH86lF8FcfPD12qU4U8V43SuFSJhPJVrvjnr5QPA=",
+        "ref": "refact/clear-buora-lambda",
+        "rev": "68628c0ddb4ae9e270458bbb2b992a26e2fd8789",
+        "revCount": 111,
+        "type": "git",
+        "url": "ssh://git@github.com/A3Data/buora_infra.git"
+      },
+      "original": {
+        "ref": "refact/clear-buora-lambda",
+        "type": "git",
+        "url": "ssh://git@github.com/A3Data/buora_infra.git"
+      }
+    },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1742889210,
-        "narHash": "sha256-hw63HnwnqU3ZQfsMclLhMvOezpM7RSB0dMAtD5/sOiw=",
+        "lastModified": 1743448293,
+        "narHash": "sha256-bmEPmSjJakAp/JojZRrUvNcDX2R5/nuX6bm+seVaGhs=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "698214a32beb4f4c8e3942372c694f40848b360d",
+        "rev": "77b584d61ff80b4cef9245829a6f1dfad5afdfa3",
         "type": "github"
       },
       "original": {
@@ -35,6 +69,8 @@
     "root": {
       "inputs": {
         "batch": "batch",
+        "buora": "buora",
+        "buora_infra": "buora_infra",
         "nixpkgs": "nixpkgs"
       }
     }

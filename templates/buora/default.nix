@@ -2,41 +2,49 @@
 args:
 let
   finalArgs = args // {
-    projectName = args.projectName or "Demo da daily de titulo pro README";
-    description = args.description or "Esse é um projeto demo da daily de titulo pro README e outros patches";
+    projectName = args.projectName or "Buora";
+    description = args.description or "afd";
     version = args.version or "1.0";
     options = args.options or {
-      deleteBase24 = false;
+      include = {
+        functions = [ "agent1" "fn_authorizeers" "fn_conversation_db" ];
+        frontend = true;
+      };
     };
   };
   inherit (finalArgs) projectName description version options;
-in
-pkgs.stdenv.mkDerivation {
+
+  buora = inputs.buora;
+  buora_infra = inputs.buora_infra;
+in pkgs.stdenv.mkDerivation {
   pname = projectName;
   version = "1.0";
-  src = pkgs.fetchFromGitHub {
-    owner = "A3Data";
-    repo = "buora-oficial";
-    rev = "main";
-    sha256 = "sha256-WtroUX4eILFD+2Y5XKF/sNcQQ1KrLrIyLjm5cr6EOEU=";
-  };
-  patches =
-    [    ];
-
-  # postPatch = ''
-  #   substituteInPlace README.md --replace-fail \
-  #     "# Documentação CICD" \
-  #     "# ${projectName}"
-  # '';
+  # src = inputs.buora;
+  patches = [ ];
 
   phases = [
-    "unpackPhase"
+    # "unpackPhase" 
     "patchPhase"
     "installPhase"
   ];
 
+  # installPhase = ''
+  #   mkdir -p $out
+  #   cp -r . $out/
+  # '';
   installPhase = ''
     mkdir -p $out
-    cp -r . $out/
+
+    # Copy buora files
+    cp -r ${buora}/* $out/
+
+    # Copy buora_infra files to a subdirectory
+    mkdir -p $out/infra
+    cp -r ${buora_infra}/* $out/infra/
+
+    # Optional: Apply the README substitution that was in your commented code
+    substituteInPlace $out/README.md --replace-fail \
+      "# Documentação CICD" \
+      "# ${projectName}"
   '';
 }
