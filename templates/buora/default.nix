@@ -34,13 +34,12 @@ in pkgs.stdenv.mkDerivation {
     
     cp -r --no-preserve=mode ${buora_infra}/* build/infra/
   
-    ${lib.optionalString (options.includeDocs) "rm -rf build/infra/docs"}
-    ${lib.optionalString (options.includeFrontend) "rm -rf build/infra/frontend"}
-    ${lib.optionalString (options.includeTerraform) "rm -rf build/infra/terraform"}
-    
-    ${lib.optionalString (options.includeAgent1) "rm -rf build/infra/functions/agent1"}
-    ${lib.optionalString (options.includeFnAuthorizers) "rm -rf build/infra/functions/fn_authorizers"}
-    ${lib.optionalString (options.includeFnConversationDb) "rm -rf build/infra/functions/fn_conversation_db"}
+    ${lib.optionalString (!options.includeDocs) "rm -rf build/infra/docs"}
+    ${lib.optionalString (!options.includeFrontend) "rm -rf build/infra/frontend"}
+    ${lib.optionalString (!options.includeTerraform) "rm -rf build/infra/terraform"}
+    ${lib.optionalString (!options.includeAgent1) "rm -rf build/infra/functions/agent1"}
+    ${lib.optionalString (!options.includeFnAuthorizers) "rm -rf build/infra/functions/fn_authorizers"}
+    ${lib.optionalString (!options.includeFnConversationDb) "rm -rf build/infra/functions/fn_conversation_db"}
   '';
   
   installPhase = ''

@@ -8,8 +8,8 @@
       includeFrontend = false;
       includeTerraform = false;
       
-      includeAgent1 = true;
+      includeAgent1 = false;
       includeFnAuthorizers = false;
-      includeFnConversationDb = true;
+      includeFnConversationDb = false;
     };
 }
