@@ -4,6 +4,7 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    
     batch = {
       url = "github:A3DAndre/templates";
       flake = false;

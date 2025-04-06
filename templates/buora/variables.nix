@@ -1,15 +1,15 @@
 {
-  projectName = "Rogerio";
+  projectName = "Buora Template";
   description =
-    "Esse é um projeto demo da daily de titulo pro README e outros patches";
+    "Demo do template do buora para criar um projeto com a estrutura de pastas e arquivos padrão.";
   version = "1.0";
   options = {
-      includeDocs = false;
-      includeFrontend = false;
-      includeTerraform = false;
+      includeDocs = true;
+      includeFrontend = true;
+      includeTerraform = true;
       
-      includeAgent1 = false;
-      includeFnAuthorizers = false;
-      includeFnConversationDb = false;
+      includeAgent1 = true;
+      includeFnAuthorizers = true;
+      includeFnConversationDb = true;
     };
 }

@@ -1,24 +1,23 @@
 { pkgs, lib, inputs }:
-config:
+args:
+let 
+  finalArgs = (import ./variables.nix) // args; # get default parameters and override with args
+  inherit (finalArgs) projectName description version options; # extract parameters
+  inherit (inputs) batch; # extract inputs
+in
 pkgs.stdenv.mkDerivation {
-  pname = config.projectName;
-  version = config.version or "1.0";
-  # src = pkgs.fetchFromGitHub {
-  #   owner = "A3DAndre";
-  #   repo = "templates";
-  #   rev = "main";
-  #   sha256 = "sha256-QIA0p7KshOO+cHrQzXyZY+1M33D6XRDkP7NCKp5PY4M=";
-  # };
-  src = inputs.batch;
+  pname = projectName;
+  version = version;
+  src = batch;
   patches = [ ];
   postPatch = ''
     substituteInPlace README.md --replace-fail \
       "Template Deploy Batch" \
-      "${config.projectName}"
+      "${projectName}"
 
     substituteInPlace README.md --replace-fail \
       "Este repositório apresenta um pipeline de Machine Learning completo utilizando o dataset Iris. Ele cobre as etapas de download de dados, pré-processamento, treinamento de modelos e predição. Nesse repositório também estão implementadas as melhores práticas e diversas outras features." \
-      "${config.description}"
+      "${description}"
   '';
   phases = [ "unpackPhase" "patchPhase" "installPhase" ];
 
