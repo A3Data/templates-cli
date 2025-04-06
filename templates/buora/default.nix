@@ -2,10 +2,10 @@
 args:
 let
   finalArgs = (import ./variables.nix) // args; # get default parameters and override with args
-  inherit (finalArgs) projectName description version options; # extract parameters
+  inherit (finalArgs) name description version options; # extract parameters
   inherit (inputs) buora buora_infra; # extract inputs
 in pkgs.stdenv.mkDerivation {
-  pname = projectName;
+  pname = name;
   version = version;
   
   dontUnpack = true;
@@ -34,7 +34,7 @@ in pkgs.stdenv.mkDerivation {
     
     substituteInPlace $out/README.md --replace-fail \
       "buora_infra" \
-      "${projectName}" || true
+      "${name}" || true
 
   '';
 }

@@ -2,6 +2,7 @@ project:
   type: string
   prompt: "Qual é o nome do projeto?"
   default: "Infra buora"
+  option:
 
 project_name:
   type: string

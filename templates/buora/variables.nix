@@ -1,5 +1,5 @@
 {
-  projectName = "Buora Template";
+  name = "Buora Template";
   description =
     "Demo do template do buora para criar um projeto com a estrutura de pastas e arquivos padrão.";
   version = "1.0";
