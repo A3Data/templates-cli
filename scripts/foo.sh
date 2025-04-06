@@ -2,9 +2,8 @@ nix build --impure --print-out-paths --expr '
   with import <nixpkgs> {};
   let
     template = builtins.getFlake "github:A3DAndre/demo/a3";
-      # template = import ./templates/poc/default.nix { inherit pkgs lib; };
     args = {
-        projectName = "Rogerio";
+        projectName = "Demo daily";
         description =
             "Esse é um projeto demo da daily de titulo pro README e outros patches";
         version = "1.0";

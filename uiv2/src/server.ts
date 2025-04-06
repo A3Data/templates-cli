@@ -254,7 +254,7 @@ const repo = {
 
             // Run nix build with the generated expression
             // await $`nix-build temp.nix`.quiet();
-            const nixResult = (await $`nix build --impure --print-out-paths --expr ${nixExpression}`).text()
+            const nixResult = (await $`nix build --impure --print-out-paths --expr ${nixExpression} --refresh`).text()
             console.log("Nix result" + nixResult)
             // Zip the result directory
             const path = nixResult.replace("result", "")

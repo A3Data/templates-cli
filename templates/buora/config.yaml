@@ -1,0 +1,46 @@
+project:
+  type: string
+  prompt: "Qual é o nome do projeto?"
+  default: "Infra buora"
+
+project_name:
+  type: string
+  prompt: "Qual é o nome da pasta do projeto?"
+  default: "infra-buora"
+
+description:
+  type: string
+  prompt: "Qual é a descrição do projeto?"
+  default: "infraestrutura para o projeto buora"
+
+agent1:
+  type: list
+  prompt: "Você quer incluir a pasta agent1?"
+  default: "Sim"
+  choices:
+    - Sim
+    - Não
+
+fn_authorizers:
+  type: list
+  prompt: "Você quer incluir a pasta fn_authorizers?"
+  default: "Sim"
+  choices:
+    - Sim
+    - Não
+
+fn_conversation_db:
+  type: list
+  prompt: "Você quer incluir a pasta fn_conversation_db?"
+  default: "Sim"
+  choices:
+    - Sim
+    - Não
+
+frontend:
+  type: list
+  prompt: "Você quer incluir a pasta frontend?"
+  default: "Sim"
+  choices:
+    - Sim
+    - Não
