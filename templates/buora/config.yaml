@@ -2,17 +2,14 @@ project:
   type: string
   prompt: "Qual é o nome do projeto?"
   default: "Infra buora"
-  option:
+  option: "name"
 
-project_name:
-  type: string
-  prompt: "Qual é o nome da pasta do projeto?"
-  default: "infra-buora"
 
 description:
   type: string
   prompt: "Qual é a descrição do projeto?"
   default: "infraestrutura para o projeto buora"
+  option: "description"
 
 agent1:
   type: list
@@ -21,6 +18,7 @@ agent1:
   choices:
     - Sim
     - Não
+  option: "options.includeAgent1"
 
 fn_authorizers:
   type: list
@@ -29,6 +27,7 @@ fn_authorizers:
   choices:
     - Sim
     - Não
+  option: "options.includeFnAuthorizers"
 
 fn_conversation_db:
   type: list
@@ -37,6 +36,7 @@ fn_conversation_db:
   choices:
     - Sim
     - Não
+  option: "options.includeFnConversationDb"
 
 frontend:
   type: list
@@ -45,3 +45,22 @@ frontend:
   choices:
     - Sim
     - Não
+  option: "options.includeFrontend"
+
+docs:
+  type: list
+  prompt: "Você quer incluir a pasta docs?"
+  default: "Sim"
+  choices:
+    - Sim
+    - Não
+  option: "options.includeDocs"
+
+terrafrom:
+  type: list
+  prompt: "Você quer incluir a pasta terrafrom?"
+  default: "Sim"
+  choices:
+    - Sim
+    - Não
+  option: "options.includeTerraform"
