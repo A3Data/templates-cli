@@ -32,7 +32,7 @@ in pkgs.stdenv.mkDerivation {
     mkdir -p $out
     cp -r build/* $out/
     
-    substituteInPlace $out/README.md --replace \
+    substituteInPlace $out/README.md --replace-fail \
       "buora_infra" \
       "${projectName}" || true
 
