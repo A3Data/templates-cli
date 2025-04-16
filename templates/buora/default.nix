@@ -4,16 +4,13 @@ let
   finalArgs = (import ./variables.nix) // args; # get default parameters and override with args
   inherit (finalArgs) name description version options; # extract parameters
   inherit (inputs) buora buora_infra; # extract inputs
-in pkgs.stdenv.mkDerivation {
+in  {
   pname = name;
   version = version;
   
   dontUnpack = true;
-  
-  buildPhase = ''
-    # mkdir -p build
 
-    # cp -r --no-preserve=mode ${buora}/* build/
+  buildPhase = ''
 
     mkdir -p build
     
@@ -34,7 +31,7 @@ in pkgs.stdenv.mkDerivation {
     
     substituteInPlace $out/README.md --replace-fail \
       "buora_infra" \
-      "${name}" || true
+      "${name}"
 
   '';
 }
