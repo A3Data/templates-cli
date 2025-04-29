@@ -51,7 +51,7 @@
         buildInputs = with pkgs;
           [
 
-            (writeShellScriptBin "a3-t" ''
+            (writeShellScriptBin "feml2" ''
               # Check if an argument was provided
               if [ $# -lt 1 ]; then
                 echo "Usage: a3-t <template-name> '<nix-args>'"
