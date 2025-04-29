@@ -1,66 +1,71 @@
-project:
-  type: string
-  prompt: "Qual é o nome do projeto?"
-  default: "Infra buora"
+name:
+  type: input
+  prompt: "What is the project name?"
+  default: "Buora Template"
   option: "name"
 
-
 description:
-  type: string
-  prompt: "Qual é a descrição do projeto?"
-  default: "infraestrutura para o projeto buora"
+  type: input
+  prompt: "Enter a project description"
+  default: "Demo do template do buora para criar um projeto com a estrutura de pastas e arquivos padrão."
   option: "description"
 
-agent1:
-  type: list
-  prompt: "Você quer incluir a pasta agent1?"
-  default: "Sim"
-  choices:
-    - Sim
-    - Não
-  option: "options.includeAgent1"
+version:
+  type: input
+  prompt: "Project version"
+  default: "1.0"
+  option: "version"
 
-fn_authorizers:
-  type: list
-  prompt: "Você quer incluir a pasta fn_authorizers?"
-  default: "Sim"
-  choices:
-    - Sim
-    - Não
-  option: "options.includeFnAuthorizers"
-
-fn_conversation_db:
-  type: list
-  prompt: "Você quer incluir a pasta fn_conversation_db?"
-  default: "Sim"
-  choices:
-    - Sim
-    - Não
-  option: "options.includeFnConversationDb"
-
-frontend:
-  type: list
-  prompt: "Você quer incluir a pasta frontend?"
-  default: "Sim"
-  choices:
-    - Sim
-    - Não
-  option: "options.includeFrontend"
-
-docs:
-  type: list
-  prompt: "Você quer incluir a pasta docs?"
+includeDocs:
+  type: choose
+  prompt: "Include documentation folder?"
   default: "Sim"
   choices:
     - Sim
     - Não
   option: "options.includeDocs"
 
-terrafrom:
-  type: list
-  prompt: "Você quer incluir a pasta terrafrom?"
+includeFrontend:
+  type: choose
+  prompt: "Include frontend structure?"
+  default: "Sim"
+  choices:
+    - Sim
+    - Não
+  option: "options.includeFrontend"
+
+includeTerraform:
+  type: choose
+  prompt: "Include Terraform configuration?"
   default: "Sim"
   choices:
     - Sim
     - Não
   option: "options.includeTerraform"
+
+includeAgent1:
+  type: choose
+  prompt: "Include Agent1 module?"
+  default: "Sim"
+  choices:
+    - Sim
+    - Não
+  option: "options.includeAgent1"
+
+includeFnAuthorizers:
+  type: choose
+  prompt: "Include Function Authorizers?"
+  default: "Sim"
+  choices:
+    - Sim
+    - Não
+  option: "options.includeFnAuthorizers"
+
+includeFnConversationDb:
+  type: choose
+  prompt: "Include Conversation Database Function?"
+  default: "Sim"
+  choices:
+    - Sim
+    - Não
+  option: "options.includeFnConversationDb"

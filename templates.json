@@ -1,10 +1,16 @@
 {
     "templates": [
         {
-            "name": "batch"
+            "name": "batch",
+            "description": "Batch processing template"
         },
         {
-            "name": "buora"
+            "name": "buora",
+            "description": "Buora project by A3Data"
+        },
+        {
+            "name": "poc",
+            "description": "Proof of concept project by ME"
         }
     ]
 }

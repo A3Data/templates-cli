@@ -1,8 +1,17 @@
-{ pkgs, lib, inputs }:
+{
+  pkgs,
+  lib,
+  inputs,
+}:
 args:
-let 
+let
   finalArgs = (import ./variables.nix) // args; # get default parameters and override with args
-  inherit (finalArgs) name description version options; # extract parameters
+  inherit (finalArgs)
+    name
+    description
+    version
+    options
+    ; # extract parameters
   inherit (inputs) batch; # extract inputs
 in
 pkgs.stdenv.mkDerivation {
@@ -19,7 +28,11 @@ pkgs.stdenv.mkDerivation {
       "Este repositório apresenta um pipeline de Machine Learning completo utilizando o dataset Iris. Ele cobre as etapas de download de dados, pré-processamento, treinamento de modelos e predição. Nesse repositório também estão implementadas as melhores práticas e diversas outras features." \
       "${description}"
   '';
-  phases = [ "unpackPhase" "patchPhase" "installPhase" ];
+  phases = [
+    "unpackPhase"
+    "patchPhase"
+    "installPhase"
+  ];
 
   installPhase = ''
     mkdir -p $out

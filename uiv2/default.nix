@@ -1,5 +1,7 @@
 # docker.nix
-{ pkgs ? import <nixpkgs> { } }:
+{
+  pkgs ? import <nixpkgs> { },
+}:
 
 let
   bunApp = pkgs.stdenv.mkDerivation {
@@ -7,7 +9,11 @@ let
     version = "1.0.0";
 
     src = ./.;
-    buildInputs = [ pkgs.bun pkgs.zip pkgs.bash ];
+    buildInputs = [
+      pkgs.bun
+      pkgs.zip
+      pkgs.bash
+    ];
 
     # Installation phase
     installPhase = ''
@@ -25,10 +31,18 @@ let
   };
   dockerEnv = pkgs.buildEnv {
     name = "docker-env";
-    paths = [ pkgs.bun pkgs.coreutils pkgs.bash pkgs.zip pkgs.nix bunApp ];
+    paths = [
+      pkgs.bun
+      pkgs.coreutils
+      pkgs.bash
+      pkgs.zip
+      pkgs.nix
+      bunApp
+    ];
   };
 
-in pkgs.dockerTools.buildImage {
+in
+pkgs.dockerTools.buildImage {
   name = "bun-template-app";
   tag = "latest";
 
@@ -37,7 +51,9 @@ in pkgs.dockerTools.buildImage {
   config = {
     Cmd = [ "${bunApp}/bin/run-app" ];
     WorkingDir = "${bunApp}/app";
-    ExposedPorts = { "3000/tcp" = { }; };
+    ExposedPorts = {
+      "3000/tcp" = { };
+    };
     Volumes = {
       "/nix/store" = { };
       "/nix/var" = { };

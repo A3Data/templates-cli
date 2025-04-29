@@ -1,0 +1,20 @@
+project:
+    type: input
+    prompt: "Qual é o nome do projeto?" # gum placeholder
+    default: "Infra buora"
+    option: "name" # nix options
+
+description:
+    type: input
+    prompt: "Qual é a descrição do projeto?"
+    default: "infraestrutura para o projeto buora"
+    option: "description"
+
+agent1:
+    type: choose
+    prompt: "Você quer incluir a pasta agent1?"
+    default: "Sim"
+    choices:
+        - Sim
+        - Não
+    option: "options.includeAgent1"
