@@ -7,14 +7,14 @@ args:
 let
   finalArgs = (import ./variables.nix) // args;
   inherit (finalArgs)
-    projectName
+  name
     description
     version
     options
     ;
 in
 pkgs.stdenv.mkDerivation {
-  pname = projectName;
+  pname = name;
   version = "1.0";
   src = pkgs.fetchFromGitHub {
     owner = "andre-brandao";
@@ -39,7 +39,7 @@ pkgs.stdenv.mkDerivation {
   postPatch = ''
     substituteInPlace README.md --replace-fail \
       "tinted-schemes" \
-      "${projectName}"
+      "${name}"
   '';
   installPhase = ''
     mkdir -p $out
