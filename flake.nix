@@ -67,7 +67,7 @@
                   args = $2;
                 in
                 template.packages.x86_64-linux.$1 args
-              "
+              " --extra-experimental-features flakes --extra-experimental-features nix-command 
 
               # Check if the build was successful
               if [ -e result ]; then
