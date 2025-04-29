@@ -45,8 +45,8 @@
 
       };
       devShells.${system}.default = let
-        # templateRepo = "github:andre-brandao/demo/a3";
-        templateRepo = "path:${self}";
+        templateRepo = "github:andre-brandao/demo/a3";
+        # templateRepo = "path:${self}";
       in pkgs.mkShell {
         buildInputs = with pkgs;
           [
