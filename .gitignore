@@ -6,3 +6,5 @@ testes
 ui
 tmp
 *.zip
+
+__pycache__

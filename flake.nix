@@ -50,41 +50,24 @@
           buildInputs =
             with pkgs;
             let
-              makePython3JobScriptWithPythonPackages =
-                name: packagesSelectionFun: text:
-                let
-                  shellEscape =
-                    (import <nixpkgs/nixos/modules/system/boot/systemd-lib.nix> (
-                      with pkgs; { inherit config pkgs lib; }
-                    )).shellEscape;
-                  mkScriptName = s: (builtins.replaceStrings [ "\\" ] [ "-" ] (shellEscape s));
-                  x = pkgs.writeTextFile {
-                    name = "unit-script.py";
-                    executable = true;
-                    destination = "/bin/${mkScriptName name}";
-                    text = "#!/usr/bin/env python3\n${text}";
-                  };
-                  deriv = pkgs.stdenv.mkDerivation {
-                    name = mkScriptName name;
-                    buildInputs = [
-                      (pkgs.python36.withPackages (pythonPackages: packagesSelectionFun pythonPackages))
-                    ];
-                    unpackPhase = "true";
-                    installPhase = ''
-                      mkdir -p $out/bin
-                      cp ${x}/bin/${mkScriptName name} $out/bin/${mkScriptName name}
-                    '';
-                  };
-                in
-                "${deriv}/bin/${mkScriptName name}";
+
+              python = python3.withPackages (pypkgs: [
+                  pypkgs.pandas
+                  pypkgs.requests
+                  pypkgs.pyaml
+                ])
+              ;
+              cliPkgs = [
+                gum
+                bat
+                python
+              ];
             in
             [
-              gum
-              (python3.withPackages (python-pkgs: [
-                python-pkgs.pandas
-                python-pkgs.requests
-                python-pkgs.pyaml
-              ]))
+              # (writeScriptBin "cli3" ''
+
+              # '')
+              (import ./py/cli.nix { inherit pkgs; })
               (writeShellScriptBin "feml2" ''
                 # Check if an argument was provided
                 if [ $# -lt 1 ]; then
@@ -119,7 +102,8 @@
                 fi
               '')
 
-            ];
+            ]
+            ++ cliPkgs;
           shellHook = ''
             echo "DevShell ready. Run 'feml' to build the repository."
           '';

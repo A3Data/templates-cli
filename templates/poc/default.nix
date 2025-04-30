@@ -7,7 +7,7 @@ args:
 let
   finalArgs = (import ./variables.nix) // args;
   inherit (finalArgs)
-  name
+    name
     description
     version
     options
