@@ -52,7 +52,11 @@
   '';
 
   # https://devenv.sh/pre-commit-hooks/
-  pre-commit.hooks.shellcheck.enable = true;
+  pre-commit.hooks = {
+    ruff.enable = true;
+    ruff-format.enable = true;
+    pylint.enable = true;
+  };
 
   # See full reference at https://devenv.sh/reference/options/
 }
