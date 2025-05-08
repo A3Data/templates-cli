@@ -11,7 +11,7 @@
   env.GREET = "devenv";
 
   # https://devenv.sh/packages/
-  packages = [ pkgs.git ];
+  packages = [ pkgs.git pkgs.gum ];
 
   # https://devenv.sh/languages/
   languages.python = {
@@ -24,8 +24,11 @@
   };
 
   # https://devenv.sh/processes/
-  # processes.cargo-watch.exec = "cargo-watch";
+  processes = {
+    silly-example.exec = "while true; do echo hello && sleep 1; done";
+    ping.exec = "ping localhost";
 
+  };
   # https://devenv.sh/services/
   # services.postgres.enable = true;
 
@@ -55,7 +58,7 @@
   pre-commit.hooks = {
     ruff.enable = true;
     ruff-format.enable = true;
-    pylint.enable = true;
+    pylint.enable = false;
   };
 
   # See full reference at https://devenv.sh/reference/options/
