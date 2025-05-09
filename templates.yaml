@@ -2,28 +2,28 @@ templates:
   - name: batch-cookie
     description: Batch processing template
     type: cookiecutter
-    organization: AD3Andre
+    organization: A3DAndre
     repository: template-batch
     branch: main
     configPath: cookiecutter.yaml
   - name: lambda-cookie
     description: Proof of concept project by ME
     type: cookiecutter
-    organization: AD3Andre
+    organization: A3DAndre
     repository: template-lambda
     branch: main
     configPath: cookiecutter.yaml
   - name: buora
     description: Nix template for buora
     type: nix
-    organization: AD3Andre
+    organization: A3DAndre
     repository: demo
     branch: main
     configPath: templates/buora/config.yaml
   - name: batch
     description: Nix template for batch
     type: nix
-    organization: AD3Andre
+    organization: A3DAndre
     repository: demo
     branch: main
     configPath: templates/batch/config.yaml

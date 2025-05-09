@@ -15,21 +15,31 @@ def choose_template(templates: list[TemplateClass]) -> TemplateClass:
     """Prompt the user to choose a template from the list"""
     ui.display_header("Available Templates")
 
-    # Display templates with descriptions
-    template_info = [
-        f"{template['name']} - {template['description']}" for template in templates
-    ]
+    # Display templates with index
+    for idx, template in enumerate(templates, 1):
+        ui.display_info(f"{idx}. {template.config.name}", ui.PRIMARY_COLOR)
 
-    selected_option, success = ui.get_user_choice("Choose a template:", template_info)
+    while True:
+        try:
+            choice = input("\nEnter template number: ").strip()
+            if not choice:
+                ui.display_error("Template selection canceled")
+                raise typer.Exit(1)
 
-    if not success or not selected_option:
-        ui.display_error("Template selection canceled")
-        raise typer.Exit(1)
-
-    selected_template = selected_option.split(" - ")[0]
-    ui.display_info(f"Selected template: {selected_template}", ui.PRIMARY_COLOR)
-
-    return selected_template
+            index = int(choice) - 1
+            if 0 <= index < len(templates):
+                selected_template = templates[index]
+                ui.display_info(
+                    f"Selected template: {selected_template.config.name}",
+                    ui.PRIMARY_COLOR,
+                )
+                return selected_template
+            else:
+                ui.display_error(
+                    f"Please enter a number between 1 and {len(templates)}"
+                )
+        except ValueError:
+            ui.display_error("Please enter a valid number")
 
 
 @app.command()

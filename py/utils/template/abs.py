@@ -4,6 +4,8 @@ from typing import Dict, Any, Optional, Tuple
 import requests
 import base64
 import yaml
+import os
+import typer
 
 
 @dataclass
@@ -41,6 +43,22 @@ class TemplateConfig:
 #         return None, f"Error fetching template config from GitHub: {str(e)}"
 
 
+def token_github() -> str:
+    gh_config_path = os.path.expanduser("~/.config/gh/hosts.yml")
+
+    if not os.path.exists(gh_config_path):
+        raise typer.BadParameter("Execute `gh auth login` primeiro.")
+
+    with open(gh_config_path, "r") as file:
+        config = yaml.safe_load(file)
+
+    github_info = config.get("github.com")
+    if not github_info or "oauth_token" not in github_info:
+        raise typer.BadParameter("Token OAuth não encontrado.")
+    print(github_info)
+    return github_info["oauth_token"]
+
+
 class TemplateClass(ABC):
     """Abstract base class for templates"""
 
@@ -51,7 +69,12 @@ class TemplateClass(ABC):
         """Helper method to fetch files from GitHub"""
         try:
             url = f"https://api.github.com/repos/{self.config.organization}/{self.config.repository}/contents/{path}?ref={self.config.branch}"
-            response = requests.get(url)
+            headers = {
+                "Authorization": f"Bearer {token_github()}",
+                "Accept": "application/vnd.github.v3.raw",
+            }
+            print(url)
+            response = requests.get(url, headers=headers)
 
             if response.status_code != 200:
                 return None, f"Error fetching from GitHub: HTTP {response.status_code}"

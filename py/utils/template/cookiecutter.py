@@ -51,20 +51,21 @@ class CookiecutterTemplate(TemplateClass):
     def _get_template_config(self) -> Dict[str, Any]:
         """Try to load YAML config first, fallback to JSON if not found"""
         # Try YAML config first
-        yaml_content, yaml_error = self._fetch_github_file("cookiecutter.yaml")
+        yaml_content, yaml_error = self._fetch_github_file(self.config.configPath)
         if not yaml_error and yaml_content:
             self._is_yaml_config = True
             return yaml.safe_load(yaml_content)
 
+        raise ValueError(f"Failed to load yaml config {yaml_content} {yaml_error}")
         # Fallback to JSON config
-        json_content, json_error = self._fetch_github_file("cookiecutter.json")
-        if not json_error and json_content:
-            self._is_yaml_config = False
-            return json.loads(json_content)
+        # json_content, json_error = self._fetch_github_file("cookiecutter.json")
+        # if not json_error and json_content:
+        #     self._is_yaml_config = False
+        #     return json.loads(json_content)
 
-        raise ValueError(
-            "No valid configuration found (tried cookiecutter.yaml and cookiecutter.json)"
-        )
+        # raise ValueError(
+        #     "No valid configuration found (tried cookiecutter.yaml and cookiecutter.json)"
+        # )
 
     def _collect_user_inputs(self) -> Dict[str, Any]:
         """Collect user inputs based on configuration format"""
