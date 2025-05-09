@@ -2,7 +2,7 @@ import yaml
 import requests
 import base64
 from utils.template.abs import TemplateConfig, TemplateClass
-from utils.template.nix import NixTemplate
+from utils.template.nix_template import NixTemplate
 from utils.template.cookiecutter import CookiecutterTemplate
 import rich
 import os
