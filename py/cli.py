@@ -122,7 +122,7 @@ def main():
     templates_data = ui.display_spinner("Loading templates...", templates.get_templates)
 
     if isinstance(templates_data, tuple):
-        ui.display_error(templates_data[1])
+        ui.display_error(message=templates_data[1])
         raise typer.Exit(1)
 
     # Extract template information for display

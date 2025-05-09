@@ -18,7 +18,14 @@
       url = "git+ssh://git@github.com/A3Data/buora_infra.git?ref=refact/clear-buora-lambda";
       flake = false;
     };
-
+    batch_cookie = {
+      url = "git+ssh://git@github.com/A3DAndre/template-batch.git?ref=main";
+      flake = false;
+    };
+    lambda_cookie = {
+      url = "git+ssh://git@github.com/A3DAndre/template-lambda.git?ref=main";
+      flake = false;
+    };
   };
 
   outputs =

@@ -1,7 +1,9 @@
 templates:
   - name: batch
     description: Batch processing template
-  - name: buora
-    description: Buora project by A3Data
-  - name: poc
+    type: cookiecutter
+    organization: AD3Andre
+    repository: template-batch
+    branch: main
+  - name: lambda
     description: Proof of concept project by ME
