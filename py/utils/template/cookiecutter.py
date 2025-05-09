@@ -2,7 +2,7 @@ from typing import Dict, Any
 from cookiecutter.main import cookiecutter
 import json
 import yaml
-from abs import TemplateConfig, TemplateClass
+from utils.template.abs import TemplateConfig, TemplateClass
 from utils.ui import display_header, get_user_input, display_separator
 from utils.ui import display_format_markdown, display_info
 

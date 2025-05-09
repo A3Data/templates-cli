@@ -1,6 +1,6 @@
 from typing import Dict, Any
 import subprocess
-from abs import TemplateClass
+from utils.template.abs import TemplateClass
 from utils.ui import display_header, get_user_input, display_separator
 from utils.ui import display_info, display_code
 
