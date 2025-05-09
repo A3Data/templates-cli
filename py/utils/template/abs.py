@@ -1,8 +1,7 @@
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
-from typing import Dict, Any, Optional, Tuple
+from typing import Dict, Any
 import requests
-import base64
 import yaml
 import os
 import typer
@@ -19,28 +18,6 @@ class TemplateConfig:
     repository: str
     branch: str = "main"
     configPath: str = "config.yaml"
-
-
-# def get_github_template_options(t:TemplateConfig):
-#     """Fetch template options from GitHub repository"""
-#     try:
-#         # Fetch config.yaml from GitHub
-#         url = f"https://api.github.com/repos/{t.organization}/{t.repository}/contents/{t.configPath}?ref={t.branch}"
-#         response = requests.get(url)
-
-#         if response.status_code != 200:
-#             return None, f"Error fetching template config from GitHub: HTTP {response.status_code}"
-
-#         content = response.json()
-#         # Decode content from base64
-#         file_content = base64.b64decode(content['content']).decode('utf-8')
-
-#         # Parse YAML content
-#         return yaml.safe_load(file_content), None
-#     except requests.RequestException as e:
-#         return None, f"Network error while accessing GitHub: {str(e)}"
-#     except Exception as e:
-#         return None, f"Error fetching template config from GitHub: {str(e)}"
 
 
 def token_github() -> str:
@@ -65,28 +42,16 @@ class TemplateClass(ABC):
     def __init__(self, config: TemplateConfig):
         self.config = config
 
-    def _fetch_github_file(self, path: str) -> Tuple[Optional[dict], Optional[str]]:
+    def _fetch_github_file(self, path: str) -> str:
         """Helper method to fetch files from GitHub"""
-        try:
-            url = f"https://api.github.com/repos/{self.config.organization}/{self.config.repository}/contents/{path}?ref={self.config.branch}"
-            headers = {
-                "Authorization": f"Bearer {token_github()}",
-                "Accept": "application/vnd.github.v3.raw",
-            }
-            print(url)
-            response = requests.get(url, headers=headers)
-
-            if response.status_code != 200:
-                return None, f"Error fetching from GitHub: HTTP {response.status_code}"
-
-            content = response.json()
-            file_content: str = base64.b64decode(content["content"]).decode("utf-8")
-            return file_content, None
-
-        except requests.RequestException as e:
-            return None, f"Network error while accessing GitHub: {str(e)}"
-        except Exception as e:
-            return None, f"Error fetching from GitHub: {str(e)}"
+        url = f"https://api.github.com/repos/{self.config.organization}/{self.config.repository}/contents/{path}?ref={self.config.branch}"
+        headers = {
+            "Authorization": f"Bearer {token_github()}",
+            "Accept": "application/vnd.github.v3.raw",
+        }
+        print(url)
+        response = requests.get(url, headers=headers)
+        return response.text
 
     def _fetch_template_options(self) -> Dict[str, Any]:
         """

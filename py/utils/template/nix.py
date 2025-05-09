@@ -3,21 +3,65 @@ import subprocess
 from utils.template.abs import TemplateClass
 from utils.ui import display_header, get_user_input, display_separator
 from utils.ui import display_info, display_code
+import yaml
+from utils import nix
 
 
 class NixTemplate(TemplateClass):
     def collect_inputs(self) -> str:
         """Collect inputs from the user based on template configuration"""
         display_header("Template Configuration")
-
         # Get template config
         config = self._get_template_config()
         if not config:
             raise ValueError("Failed to load template configuration")
 
         # Collect inputs and convert to Nix expression
-        collected_data = self._collect_user_inputs(config)
+        collected_data = self._prompt_user(config)
+
+        self.display_summary(collected_data)
+
         return self._generate_nix_attr_set(collected_data)
+
+    def _prompt_user(self, template_options):
+        """Collect user inputs based on template options"""
+        collected_data = {}
+
+        print(display_header("Template Configuration"))
+
+        for field_name, field_config in template_options.items():
+            field_type = field_config.get("type")
+            prompt = field_config.get("prompt", f"Enter {field_name}")
+            default = field_config.get("default", "")
+            option = field_config.get("option", field_name)
+
+            if field_type == "input":
+                value, success = get_user_input(prompt, default)
+                if success:
+                    nix.set_nested_value(collected_data, option, value)
+
+            elif field_type == "choose":
+                # choices = field_config.get("choices", [])
+                # value, success = get_user_choice(prompt, choices)
+                value, success = get_user_input(prompt + " Sim/Não", default)
+
+                if success:
+                    # Convert 'Sim'/'Não' to boolean values for options
+                    if value == "Sim":
+                        value = True
+                    elif value == "Não":
+                        value = False
+
+                    nix.set_nested_value(collected_data, option, value)
+                elif default:
+                    # Use default if user canceled
+                    value = default
+                    display_info(f"Using default: {default}")
+                    nix.set_nested_value(collected_data, option, value)
+
+            display_separator()
+
+        return collected_data
 
     def display_summary(self, collected_data: Dict[str, Any]) -> bool:
         """Display a summary of collected data and get confirmation"""
@@ -50,30 +94,14 @@ class NixTemplate(TemplateClass):
         except Exception as e:
             raise RuntimeError(f"Failed to build template: {str(e)}")
 
-    def _get_template_config(self) -> Dict[str, Any]:
+    def _get_template_config(self):
         """Get template configuration from YAML"""
-        yaml_content, yaml_error = self._fetch_github_file("template.yaml")
-        if yaml_error or not yaml_content:
-            raise ValueError(f"Failed to fetch template config: {yaml_error}")
+        yaml_content = self._fetch_github_file(self.config.configPath)
+        print(yaml_content)
+        if not yaml_content:
+            raise ValueError("Failed to fetch template config")
 
-        return yaml_content
-
-    def _collect_user_inputs(self, config: Dict[str, Any]) -> Dict[str, Any]:
-        """Collect user inputs based on configuration"""
-        collected_data = {}
-
-        for field_name, field_config in config.items():
-            prompt = field_config.get("prompt", field_name)
-            default = field_config.get("default", "")
-
-            value, success = get_user_input(prompt, str(default))
-            if not success:
-                raise ValueError("Input collection cancelled by user")
-
-            collected_data[field_name] = value
-            display_separator()
-
-        return collected_data
+        return yaml.safe_load(yaml_content)
 
     def _generate_nix_attr_set(self, data: Dict[str, Any]) -> str:
         """Convert dictionary to Nix attribute set"""

@@ -45,7 +45,7 @@ def display_info(message: str, color: str = SECONDARY_COLOR) -> None:
 def display_code(code: str, language: str = "") -> None:
     """Display code with syntax highlighting"""
     syntax = Syntax(code, language or "text", theme="monokai")
-    console.print(syntax)
+    print(syntax)
 
 
 def get_user_choice(prompt: str, options: List[str]) -> tuple[str, bool]:

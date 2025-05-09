@@ -59,7 +59,8 @@ def main():
     templates_data = get_templates()
     template = choose_template(templates_data)
     template_config = template.collect_inputs()
-    template.build(template_config)
+    print(template_config)
+    template.build(template_config, "./output")
 
 
 if __name__ == "__main__":

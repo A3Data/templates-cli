@@ -18,6 +18,7 @@ class CookiecutterTemplate(TemplateClass):
         display_header("Template Configuration")
 
         self._raw_config = self._get_template_config()
+
         if not self._raw_config:
             raise ValueError("Failed to load template configuration")
 
@@ -51,12 +52,13 @@ class CookiecutterTemplate(TemplateClass):
     def _get_template_config(self) -> Dict[str, Any]:
         """Try to load YAML config first, fallback to JSON if not found"""
         # Try YAML config first
-        yaml_content, yaml_error = self._fetch_github_file(self.config.configPath)
-        if not yaml_error and yaml_content:
+        yaml_content = self._fetch_github_file(self.config.configPath)
+        print(yaml_content)
+        if yaml_content:
             self._is_yaml_config = True
             return yaml.safe_load(yaml_content)
 
-        raise ValueError(f"Failed to load yaml config {yaml_content} {yaml_error}")
+        raise ValueError(f"Failed to load yaml config {yaml_content}")
         # Fallback to JSON config
         # json_content, json_error = self._fetch_github_file("cookiecutter.json")
         # if not json_error and json_content:
