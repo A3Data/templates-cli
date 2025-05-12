@@ -32,7 +32,6 @@ def token_github() -> str:
     github_info = config.get("github.com")
     if not github_info or "oauth_token" not in github_info:
         raise typer.BadParameter("Token OAuth não encontrado.")
-    print(github_info)
     return github_info["oauth_token"]
 
 
@@ -49,7 +48,6 @@ class TemplateClass(ABC):
             "Authorization": f"Bearer {token_github()}",
             "Accept": "application/vnd.github.v3.raw",
         }
-        print(url)
         response = requests.get(url, headers=headers)
         return response.text
 

@@ -41,9 +41,6 @@ def get_templates() -> list[TemplateClass]:
     """Read templates from templates.yaml file locally or from GitHub"""
     # TODO: add spinner
     template_configs = get_github_templates()
-    print(template_configs)
-    print(template_configs.__class__)
-    print(template_configs[0].__class__)
     # templates = [new_template(config) for config in template_configs]
     templates = []
     for config in template_configs:
@@ -63,7 +60,6 @@ def get_github_templates() -> list[TemplateConfig]:
     try:
         # Fetch templates.yaml from GitHub
         url = f"https://api.github.com/repos/{GITHUB_REPO_OWNER}/{GITHUB_REPO_NAME}/contents/templates.yaml?ref={GITHUB_BRANCH}"
-        print(url)
         response = requests.get(url)
 
         if response.status_code != 200:

@@ -53,7 +53,6 @@ class CookiecutterTemplate(TemplateClass):
         """Try to load YAML config first, fallback to JSON if not found"""
         # Try YAML config first
         yaml_content = self._fetch_github_file(self.config.configPath)
-        print(yaml_content)
         if yaml_content:
             self._is_yaml_config = True
             return yaml.safe_load(yaml_content)

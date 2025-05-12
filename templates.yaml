@@ -13,17 +13,24 @@ templates:
     repository: template-lambda
     branch: main
     configPath: cookiecutter.yaml
-  - name: buora
-    description: Nix template for buora
-    type: nix
+  - name: buora-cookie
+    description: Buora template
+    type: cookiecutter
     organization: A3DAndre
-    repository: demo
+    repository: template-buora
     branch: main
-    configPath: templates/buora/config.yaml
-  - name: batch
-    description: Nix template for batch
-    type: nix
-    organization: A3DAndre
-    repository: demo
-    branch: main
-    configPath: templates/batch/config.yaml
+    configPath: cookiecutter.yaml
+  # - name: buora
+  #   description: Nix template for buora
+  #   type: nix
+  #   organization: A3DAndre
+  #   repository: demo
+  #   branch: main
+  #   configPath: templates/buora/config.yaml
+  # - name: batch
+  #   description: Nix template for batch
+  #   type: nix
+  #   organization: A3DAndre
+  #   repository: demo
+  #   branch: main
+  #   configPath: templates/batch/config.yaml
