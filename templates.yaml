@@ -7,7 +7,7 @@ templates:
     branch: main
     configPath: cookiecutter.yaml
   - name: lambda-cookie
-    description: Proof of concept project by ME
+    description: AWS Lambda template
     type: cookiecutter
     organization: A3DAndre
     repository: template-lambda
@@ -20,13 +20,13 @@ templates:
     repository: template-buora
     branch: main
     configPath: cookiecutter.yaml
-  # - name: buora
-  #   description: Nix template for buora
-  #   type: nix
-  #   organization: A3DAndre
-  #   repository: demo
-  #   branch: main
-  #   configPath: templates/buora/config.yaml
+  - name: poc
+    description: Proof of concept project by ME
+    type: nix
+    organization: A3DAndre
+    repository: demo
+    branch: main
+    configPath: templates/buora/config.yaml
   # - name: batch
   #   description: Nix template for batch
   #   type: nix
