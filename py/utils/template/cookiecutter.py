@@ -78,8 +78,9 @@ class CookiecutterTemplate(TemplateClass):
     def _collect_from_yaml(self) -> Dict[str, Any]:
         """Collect inputs based on YAML structured format"""
         collected_data = {}
-
+        print(self._raw_config)
         for field_name, field_config in self._raw_config.items():
+            # print(field_config)
             prompt = field_config.get("prompt", field_name)
             default = field_config.get("default", "")
 

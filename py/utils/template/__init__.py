@@ -4,7 +4,8 @@ import base64
 from utils.template.abs import TemplateConfig, TemplateClass
 from utils.template.nix_template import NixTemplate
 from utils.template.cookiecutter import CookiecutterTemplate
-import rich
+
+# import rich
 import os
 # import typer
 
@@ -16,19 +17,8 @@ GITHUB_REPO_NAME = "demo"
 GITHUB_BRANCH = "cookie/python-cli"  # Default branch
 
 
-def pretty_print_template(template: TemplateConfig):
-    rich.print(f"[bold magenta]Template Name:[/bold magenta] {template.name}\n")
-    rich.print(f"[bold magenta]Description:[/bold magenta] {template.description}\n")
-    rich.print(f"[bold magenta]Type:[/bold magenta] {template.type}\n")
-    rich.print(f"[bold magenta]Organization:[/bold magenta] {template.organization}\n")
-    rich.print(f"[bold magenta]Repository:[/bold magenta] {template.repository}\n")
-    rich.print(f"[bold magenta]Branch:[/bold magenta] {template.branch}\n")
-    rich.print(f"[bold magenta]Config Path:[/bold magenta] {template.configPath}\n")
-
-
 def new_template(config: TemplateConfig) -> TemplateClass:
     """Create a new template instance based on the configuration"""
-    print(f"Creating template: {config.name}")
     if config.type == "nix":
         return NixTemplate(config)
     elif config.type == "cookiecutter":
@@ -47,7 +37,7 @@ def get_templates() -> list[TemplateClass]:
         try:
             template = new_template(config)
             templates.append(template)
-            print(template)
+            # print(template)
         except Exception as e:
             print(f"Error creating template: {e}")
             continue
@@ -97,23 +87,3 @@ def get_github_templates() -> list[TemplateConfig]:
         print(f"Error fetching templates from GitHub: {str(e)}")
         os.exit(1)
         # return None, f"Error fetching templates from GitHub: {str(e)}"
-
-
-def set_template_source(source, owner=None, repo=None, branch=None):
-    """Configure template source - local or GitHub"""
-    global SOURCE, GITHUB_REPO_OWNER, GITHUB_REPO_NAME, GITHUB_BRANCH
-
-    if source not in ["local", "github"]:
-        return False, "Source must be 'local' or 'github'"
-
-    SOURCE = source
-
-    if source == "github":
-        if owner:
-            GITHUB_REPO_OWNER = owner
-        if repo:
-            GITHUB_REPO_NAME = repo
-        if branch:
-            GITHUB_BRANCH = branch
-
-    return True, f"Template source set to {source}"

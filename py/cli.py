@@ -54,7 +54,6 @@ def main():
                                     |_|
 """
     console.print(title)
-
     # Get available templates with a spinner
     templates_data = get_templates()
     template = choose_template(templates_data)
