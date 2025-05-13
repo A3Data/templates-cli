@@ -57,7 +57,9 @@ class TemplateClass(ABC):
         Returns: Tuple of (options_dict, error_message)
         """
         file_content = self._fetch_github_file(self.config.configPath)
-
+        if not file_content:
+            raise ValueError("Failed to fetch template options")
+        
         return yaml.safe_load(file_content)
 
     @abstractmethod
@@ -65,10 +67,10 @@ class TemplateClass(ABC):
         """Collect inputs from the user and return them as a string (nix expression) or cookiecutter.json as a string"""
         pass
 
-    @abstractmethod
-    def display_summary(self, collected_data: Dict[str, Any]) -> bool:
-        """Display a summary of the collected data"""
-        pass
+    # @abstractmethod
+    # def display_summary(self, collected_data: Dict[str, Any]) -> bool:
+    #     """Display a summary of the collected data"""
+    #     pass
 
     @abstractmethod
     def build(self, config: str, output_dir: str) -> None:

@@ -13,8 +13,8 @@ import os
 SOURCE = "github"
 # GitHub repo information
 GITHUB_REPO_OWNER = "A3DAndre"
-GITHUB_REPO_NAME = "demo"
-GITHUB_BRANCH = "cookie/python-cli"  # Default branch
+GITHUB_REPO_NAME = "templates-cli"
+GITHUB_BRANCH = "main"  # Default branch
 
 
 def new_template(config: TemplateConfig) -> TemplateClass:
@@ -35,7 +35,7 @@ def get_templates() -> list[TemplateClass]:
     templates = []
     for config in template_configs:
         try:
-            template = new_template(config)
+            template: TemplateClass = new_template(config)
             templates.append(template)
             # print(template)
         except Exception as e:

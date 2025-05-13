@@ -1,4 +1,4 @@
-from typing import List, Any, Callable, Optional
+from typing import List, Any, Callable, Optional, Union, Set, Dict
 from rich.console import Console
 from rich.markdown import Markdown
 from rich.syntax import Syntax
@@ -49,28 +49,21 @@ def display_code(code: str, language: str = "") -> None:
     console.print(syntax)
 
 
-def get_user_choice(prompt: str, options: List[str]) -> tuple[str, bool]:
-    """Get user choice from a list of options using Rich's Prompt"""
-    try:
-        display_info(prompt, PRIMARY_COLOR)
-        # Convert spaces to underscores for choices
-        choice_map = {opt.replace(" ", "_"): opt for opt in options}
-        result = Prompt.ask(
-            "",
-            choices=list(choice_map.keys()),
-            show_choices=True,
-        )
-        return choice_map[result], True
-    except KeyboardInterrupt:
-        return "", False
-
-
-def get_user_input(
+def get_string_option(
     prompt: str,
     default: str = "",
     validate: Optional[Callable[[str], bool]] = None,
 ) -> tuple[str, bool]:
-    """Get user input with optional validation"""
+    """Get a string input from the user with optional validation.
+
+    Args:
+        prompt: The prompt to show to the user
+        default: Default value if no input is provided
+        validate: Optional validation function
+
+    Returns:
+        tuple[str, bool]: The input value and whether input was successful
+    """
     try:
         # Show prompt with color
         console.print(f"[{SECONDARY_COLOR}]{prompt}[/]")
@@ -94,12 +87,152 @@ def get_user_input(
         return "", False
 
 
-def get_user_confirmation(prompt: str, default: bool = False) -> bool:
-    """Get yes/no confirmation from user"""
+def get_radio_option(
+    prompt: str, options: List[str], default: Optional[str] = None
+) -> tuple[str, bool]:
+    """Get a single selection from a list of options using radio-style selection.
+
+    Args:
+        prompt: The prompt to show to the user
+        options: List of options to choose from
+        default: Default option if none selected
+
+    Returns:
+        tuple[str, bool]: The selected option and whether selection was successful
+    """
     try:
-        return Confirm.ask(prompt, default=default)
+        display_info(prompt, PRIMARY_COLOR)
+        # Convert spaces to underscores for choices
+        choice_map = {opt.replace(" ", "_"): opt for opt in options}
+
+        default_key = default.replace(" ", "_") if default in options else None
+
+        result = Prompt.ask(
+            "",
+            choices=list(choice_map.keys()),
+            default=default_key,
+            show_choices=True,
+            show_default=bool(default),
+        )
+        return choice_map[result], True
     except KeyboardInterrupt:
-        return False
+        return "", False
+
+
+def get_checkbox_option(
+    prompt: str, options: List[str], default: Optional[List[str]] = None
+) -> tuple[List[str], bool]:
+    """Get multiple selections from a list of options using checkboxes.
+
+    Args:
+        prompt: The prompt to show to the user
+        options: List of options to choose from
+        default: Default selected options
+
+    Returns:
+        tuple[List[str], bool]: The selected options and whether selection was successful
+    """
+    try:
+        display_info(prompt, PRIMARY_COLOR)
+        result = Prompt.ask(
+            "",
+            choices=options,
+            default=default,
+            show_default=bool(default),
+        )
+        return result, True
+    except KeyboardInterrupt:
+        return [], False
+
+
+def get_boolean_option(prompt: str, default: bool = False) -> tuple[bool, bool]:
+    """Get a boolean input from the user.
+
+    Args:
+        prompt: The prompt to show to the user
+        default: Default value if no input is provided
+
+    Returns:
+        tuple[bool, bool]: The boolean value and whether input was successful
+    """
+    try:
+        result = Confirm.ask(prompt, default=default)
+        return result, True
+    except KeyboardInterrupt:
+        return False, False
+
+def collect_template_inputs(raw_config: Dict[str, Dict[str, Any]]) -> Dict[str, Any]:
+    """Collect user inputs based on template configuration.
+    
+    Args:
+        raw_config: Dictionary containing template configuration options
+        
+    Returns:
+        Dict[str, Any]: Dictionary containing collected user inputs. Returns field names 
+        with their collected values. For radio/checkbox options, returns selected values 
+        from the options list.
+        
+    Example raw_config:
+        {
+            "projectName": {
+                "type": "string",
+                "prompt": "What is the project name?",
+                "default": "my-project"
+            },
+            "features": {
+                "type": "checkbox",
+                "prompt": "Select features to include",
+                "list": ["api", "cli", "web"],
+                "default": ["api"]
+            },
+            "deployment": {
+                "type": "radio",
+                "prompt": "Select deployment platform",
+                "list": ["aws", "gcp", "azure"],
+                "default": "aws"
+            }
+        }
+    """
+    collected_data = {}
+    display_header("Template Configuration")
+
+    for field_name, field_config in raw_config.items():
+        option_type = field_config.get("type", "string")
+        prompt = field_config.get("prompt", field_name)
+        default = field_config.get("default")
+        
+        # Get user input based on option type
+        if option_type == "string":
+            value, success = get_string_option(prompt, str(default or ""))
+            
+        elif option_type == "checkbox":
+            options = field_config.get("list", [])
+            if isinstance(default, str):
+                default = [default] if default else []
+            value, success = get_checkbox_option(prompt, options, default)
+            
+        elif option_type == "radio":
+            options = field_config.get("list", [])
+            value, success = get_radio_option(prompt, options, default)
+            
+        elif option_type == "boolean":
+            if isinstance(default, str):
+                default = default.lower() == "true"
+            value, success = get_boolean_option(prompt, bool(default))
+            
+        else:
+            display_error(f"Unsupported option type: {option_type}")
+            continue
+
+        if not success:
+            value = default
+
+        # Store the collected value and its option path if specified
+        option_path = field_config.get("option", field_name)
+        collected_data[option_path] = value
+        display_separator()
+
+    return collected_data
 
 
 def display_separator() -> None:
@@ -125,3 +258,4 @@ def display_format_markdown(markdown_text: str) -> None:
     """Display formatted markdown text"""
     md = Markdown(markdown_text)
     console.print(md)
+
