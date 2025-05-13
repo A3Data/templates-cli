@@ -1,6 +1,5 @@
 
 import sys
-from utils.template import TemplateClass
 from typing import List, Any, Callable, Optional, Union, Set, Dict
 from rich.console import Console
 from rich.markdown import Markdown
@@ -263,35 +262,32 @@ def display_format_markdown(markdown_text: str) -> None:
     console.print(md)
 
 
+def choose_item(items: list[Any], item_name: str = "item") -> Any:
+    """Prompt the user to choose an item from the list"""
+    display_header(f"Available {item_name.capitalize()}s")
 
-
-def choose_template(templates: list[TemplateClass]) -> TemplateClass:
-    """Prompt the user to choose a template from the list"""
-    display_header("Available Templates")
-
-    # Display templates with index
-    for idx, template in enumerate(templates, 1):
-        display_info(f"{idx}. {template.config.name}", PRIMARY_COLOR)
+    # Display items with index
+    for idx, item in enumerate(items, 1):
+        display_info(f"{idx}. {item}", PRIMARY_COLOR)
 
     while True:
         try:
-            choice = input("\nEnter template number: ").strip()
+            choice = input(f"\nEnter {item_name} number: ").strip()
             if not choice:
-                display_error("Template selection canceled")
-                # raise typer.Exit(1)
+                display_error(f"{item_name.capitalize()} selection canceled")
                 sys.exit(1)
 
             index = int(choice) - 1
-            if 0 <= index < len(templates):
-                selected_template = templates[index]
+            if 0 <= index < len(items):
+                selected_item = items[index]
                 display_info(
-                    f"Selected template: {selected_template.config.name}",
+                    f"Selected {item_name}: {selected_item}",
                     PRIMARY_COLOR,
                 )
-                return selected_template
+                return selected_item
             else:
                 display_error(
-                    f"Please enter a number between 1 and {len(templates)}"
+                    f"Please enter a number between 1 and {len(items)}"
                 )
         except ValueError:
             display_error("Please enter a valid number")

@@ -25,7 +25,7 @@ def main():
     console.print(title)
     # Get available templates with a spinner
     templates_data = get_templates()
-    template = ui.choose_template(templates_data)
+    template = ui.choose_item(templates_data, "template")
     template_options = template.get_template_options()
     collected_data = ui.collect_template_inputs(template_options)
     template_config = template.encode_input(collected_data)
