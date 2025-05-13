@@ -26,7 +26,7 @@ templates:
     organization: A3DAndre
     repository: demo
     branch: main
-    configPath: templates/buora/config.yaml
+    configPath: templates/poc/config.yaml
   # - name: batch
   #   description: Nix template for batch
   #   type: nix
