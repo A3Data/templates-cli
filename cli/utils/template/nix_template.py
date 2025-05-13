@@ -1,31 +1,11 @@
-from typing import Dict, Any
 import subprocess
+from typing import Dict, Any
 from utils.template.abs import TemplateClass
-import utils.ui as ui
-import yaml
-from utils import nix
-
 
 class NixTemplate(TemplateClass):
-    def collect_inputs(self) -> str:
-        """Collect inputs from the user based on template configuration"""
-        ui.display_header("Template Configuration")
-        # Get template config
-        config = self._get_template_config()
-        if not config:
-            raise ValueError("Failed to load template configuration")
-
-        # Collect inputs and convert to Nix expression
-        collected_data = self._prompt_user(config)
-
-        print(collected_data)
-
+    def encode_input(self, collected_data) -> str:
+        """Encodes the collected data into a Nix attribute set that will be used as the arguments for the derivation that builds the template"""
         return self._generate_nix_attr_set(collected_data)
-
-    def _prompt_user(self, template_options):
-        """Collect user inputs based on template options"""
-        return ui.collect_template_inputs(template_options)
-
 
     def build(self, config: str, output_dir: str) -> None:
         """Build the nix template"""
@@ -45,15 +25,6 @@ class NixTemplate(TemplateClass):
 
         except Exception as e:
             raise RuntimeError(f"Failed to build template: {str(e)}")
-
-    def _get_template_config(self):
-        """Get template configuration from YAML"""
-        yaml_content = self._fetch_github_file(self.config.configPath)
-        print(yaml_content)
-        if not yaml_content:
-            raise ValueError("Failed to fetch template config")
-
-        return yaml.safe_load(yaml_content)
 
     def _generate_nix_attr_set(self, data: Dict[str, Any]) -> str:
         """Convert dictionary to Nix attribute set"""

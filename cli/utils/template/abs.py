@@ -1,16 +1,15 @@
-from abc import ABC, abstractmethod
-from dataclasses import dataclass
-from typing import Dict, Any
 import requests
 import yaml
 import os
 import typer
+from abc import ABC, abstractmethod
+from dataclasses import dataclass
+from typing import Dict, Any
 
 
 @dataclass
 class TemplateConfig:
     """Configuration for a template"""
-
     name: str
     description: str
     type: str  # 'nix' or 'cookiecutter'
@@ -51,7 +50,7 @@ class TemplateClass(ABC):
         response = requests.get(url, headers=headers)
         return response.text
 
-    def _fetch_template_options(self) -> Dict[str, Any]:
+    def get_template_options(self) -> Dict[str, Any]:
         """
         Fetch template options from the repository
         Returns: Tuple of (options_dict, error_message)
@@ -63,8 +62,8 @@ class TemplateClass(ABC):
         return yaml.safe_load(file_content)
 
     @abstractmethod
-    def collect_inputs(self) -> str:
-        """Collect inputs from the user and return them as a string (nix expression) or cookiecutter.json as a string"""
+    def encode_input(self, collected_data: dict) -> str:
+        """Encodes the collected data into a format suitable for the template engine"""
         pass
 
     # @abstractmethod

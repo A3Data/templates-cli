@@ -11,37 +11,6 @@ app = typer.Typer()
 console = Console()
 
 
-def choose_template(templates: list[TemplateClass]) -> TemplateClass:
-    """Prompt the user to choose a template from the list"""
-    ui.display_header("Available Templates")
-
-    # Display templates with index
-    for idx, template in enumerate(templates, 1):
-        ui.display_info(f"{idx}. {template.config.name}", ui.PRIMARY_COLOR)
-
-    while True:
-        try:
-            choice = input("\nEnter template number: ").strip()
-            if not choice:
-                ui.display_error("Template selection canceled")
-                raise typer.Exit(1)
-
-            index = int(choice) - 1
-            if 0 <= index < len(templates):
-                selected_template = templates[index]
-                ui.display_info(
-                    f"Selected template: {selected_template.config.name}",
-                    ui.PRIMARY_COLOR,
-                )
-                return selected_template
-            else:
-                ui.display_error(
-                    f"Please enter a number between 1 and {len(templates)}"
-                )
-        except ValueError:
-            ui.display_error("Please enter a valid number")
-
-
 @app.command()
 def main():
     """A3 Template Generator CLI"""
@@ -56,8 +25,10 @@ def main():
     console.print(title)
     # Get available templates with a spinner
     templates_data = get_templates()
-    template = choose_template(templates_data)
-    template_config = template.collect_inputs()
+    template = ui.choose_template(templates_data)
+    template_options = template.get_template_options()
+    collected_data = ui.collect_template_inputs(template_options)
+    template_config = template.encode_input(collected_data)
     print(template_config)
     template.build(template_config, "./output")
 

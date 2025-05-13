@@ -1,3 +1,6 @@
+
+import sys
+from utils.template import TemplateClass
 from typing import List, Any, Callable, Optional, Union, Set, Dict
 from rich.console import Console
 from rich.markdown import Markdown
@@ -259,3 +262,36 @@ def display_format_markdown(markdown_text: str) -> None:
     md = Markdown(markdown_text)
     console.print(md)
 
+
+
+
+def choose_template(templates: list[TemplateClass]) -> TemplateClass:
+    """Prompt the user to choose a template from the list"""
+    display_header("Available Templates")
+
+    # Display templates with index
+    for idx, template in enumerate(templates, 1):
+        display_info(f"{idx}. {template.config.name}", PRIMARY_COLOR)
+
+    while True:
+        try:
+            choice = input("\nEnter template number: ").strip()
+            if not choice:
+                display_error("Template selection canceled")
+                # raise typer.Exit(1)
+                sys.exit(1)
+
+            index = int(choice) - 1
+            if 0 <= index < len(templates):
+                selected_template = templates[index]
+                display_info(
+                    f"Selected template: {selected_template.config.name}",
+                    PRIMARY_COLOR,
+                )
+                return selected_template
+            else:
+                display_error(
+                    f"Please enter a number between 1 and {len(templates)}"
+                )
+        except ValueError:
+            display_error("Please enter a valid number")
