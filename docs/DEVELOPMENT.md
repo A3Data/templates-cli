@@ -5,7 +5,6 @@
 cli/              # Diretório principal do projeto
 ├── cli.py        # Ponto de entrada da aplicação
 ├── utils/        # Utilitários e funções auxiliares
-│   ├── nix.py
 │   ├── template/ # Template Builders
 │   └── ui.py
 └── pyproject.toml # Configuração do Poetry e dependências
