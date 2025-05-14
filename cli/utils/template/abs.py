@@ -52,6 +52,10 @@ class TemplateClass(ABC):
             "Accept": "application/vnd.github.v3.raw",
         }
         response = requests.get(url, headers=headers)
+        response.raise_for_status()
+        
+        if not response.text:
+            raise ValueError(f"Failed to fetch file from {url}")
         return response.text
 
     def get_template_options(self) -> Dict[str, Any]:
