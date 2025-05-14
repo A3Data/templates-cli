@@ -46,12 +46,12 @@ def get_github_templates() -> list[TemplateConfig]:
 
     except requests.RequestException as e:
         # return None, f"Network error while accessing GitHub: {str(e)}"
-        print(f"Network error while accessing GitHub: {str(e)}")
-        os.exit(1)
+        # print(f"Network error while accessing GitHub: {str(e)}")
+        raise RuntimeError(f"Network error while accessing GitHub: {str(e)}")
     except Exception as e:
-        print(f"Error fetching templates from GitHub: {str(e)}")
-        os.exit(1)
-        # return None, f"Error fetching templates from GitHub: {str(e)}"
+        # print(f"Error fetching templates from GitHub: {str(e)}")
+        # os.exit(1)
+        raise RuntimeError(f"Error fetching templates from GitHub: {str(e)}")
 
 def new_template(config: TemplateConfig) -> TemplateClass:
     """Create a new template instance based on the configuration"""

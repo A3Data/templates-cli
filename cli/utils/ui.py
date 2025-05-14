@@ -253,7 +253,7 @@ def display_spinner(
             return result
         except Exception as e:
             status.update("[red]Failed!")
-            raise e
+            raise RuntimeError(f"Operation failed: {str(e)}") from e
 
 
 def display_format_markdown(markdown_text: str) -> None:

@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 import typer
 from rich.console import Console
+from rich.panel import Panel
+from rich.traceback import Traceback
 
 # Import our modules
 from utils import ui
@@ -22,16 +24,28 @@ def main():
  /_/   \\_\\____/    |_|\\___|_| |_| |_| .__/|_|\\__,_|\\__\\___||___/
                                     |_|
 """
-    console.print(title)
-    # Get available templates with a spinner
-    templates_data = get_templates()
-    template = ui.choose_item(templates_data, "template")
-    template_options = template.get_template_options()
-    collected_data = ui.collect_template_inputs(template_options)
-    template_config = template.encode_input(collected_data)
-    print(template_config)
-    template.build(template_config, "./output")
-
+    try:
+        console.print(title)
+        # Get available templates with a spinner
+        templates_data = get_templates()
+        template:TemplateClass = ui.choose_item(templates_data, "template")
+        template_options = template.get_template_options()
+        collected_data = ui.collect_template_inputs(template_options)
+        template_config = template.encode_input(collected_data)
+        console.print(template_config)
+        template.build(template_config, "./output")
+    except KeyboardInterrupt:
+        console.print("\n[yellow]Process cancelled by user[/yellow]")
+        raise typer.Exit(1)
+    except Exception as e:
+        console.print(Panel(
+            f"[red]Error while generating template:[/red]\n{str(e)}",
+            title="Error",
+            border_style="red"
+        ))
+        # Print detailed traceback in debug mode
+        # console.print(Traceback(), soft_wrap=True)
+        raise typer.Exit(1)
 
 if __name__ == "__main__":
     app()
