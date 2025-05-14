@@ -23,3 +23,6 @@ class CookiecutterTemplate(TemplateClass):
             )
         except Exception as e:
             raise RuntimeError(f"Failed to build template: {str(e)}")
+    
+    def is_available(self):
+        return True

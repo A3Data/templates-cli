@@ -3,6 +3,17 @@ from typing import Dict, Any
 from utils.template.abs import TemplateClass
 
 class NixTemplate(TemplateClass):
+    def is_available(self):
+        # if the template type is nix check if the nix command is available
+        if self.config.type == "nix":
+            try:
+                result = subprocess.run(["nix", "--version"], capture_output=True, text=True)
+                if result.returncode != 0:
+                    raise RuntimeError("Nix is not installed or not available in PATH")
+            except Exception as e:
+                raise RuntimeError(f"Failed to check Nix availability: {str(e)}")
+        return True
+    
     def encode_input(self, collected_data) -> str:
         """Encodes the collected data into a Nix attribute set that will be used as the arguments for the derivation that builds the template"""
         return self._generate_nix_attr_set(collected_data)
@@ -22,6 +33,16 @@ class NixTemplate(TemplateClass):
 
             if result.returncode != 0:
                 raise RuntimeError(f"Nix build failed: {result.stderr}")
+            print("Nix result: ",result.stdout)
+            
+            build_dir = result.stdout.strip()
+            # Copy the built files to the output directory
+            subprocess.run(
+                ["cp", "-r", build_dir, output_dir],
+                check=True,
+            )
+            print(f"Template built successfully in {output_dir}")
+            
 
         except Exception as e:
             raise RuntimeError(f"Failed to build template: {str(e)}")

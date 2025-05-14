@@ -83,3 +83,8 @@ class TemplateClass(ABC):
     def build(self, config: str, output_dir: str) -> None:
         """Build the template and create it in the specified directory"""
         pass
+    
+    @abstractmethod
+    def is_available(self) -> bool:
+        """Check if the template is available"""
+        pass

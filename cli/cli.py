@@ -3,7 +3,7 @@ import typer
 from rich.console import Console
 from rich.panel import Panel
 from rich.traceback import Traceback
-
+import subprocess
 # Import our modules
 from utils import ui
 from utils.template import get_templates
@@ -11,7 +11,6 @@ from utils.template import TemplateClass
 
 app = typer.Typer()
 console = Console()
-
 
 @app.command()
 def main():
@@ -29,6 +28,7 @@ def main():
         # Get available templates with a spinner
         templates_data = get_templates()
         template:TemplateClass = ui.choose_item(templates_data, "template")
+        assert template.is_available(), "Template is not available"
         template_options = template.get_template_options()
         collected_data = ui.collect_template_inputs(template_options)
         template_config = template.encode_input(collected_data)
