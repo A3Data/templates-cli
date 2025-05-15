@@ -19,7 +19,9 @@ dependencies = [
 a3t = "cli.cli:app"
 
 [tool.poetry.packages]
-include = ["src/cli"]
+packages = [
+    {include = "cli", from = "src"}
+]
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
