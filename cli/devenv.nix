@@ -33,9 +33,14 @@
   # services.postgres.enable = true;
 
   # https://devenv.sh/scripts/
-  scripts.hello.exec = ''
-    echo hello from $GREET
-  '';
+  scripts = {
+    hello.exec = ''
+      echo hello from $GREET
+    '';
+    cli.exec = ''
+      python cli.py 
+    '';
+  };
 
   enterShell = ''
     hello

@@ -93,6 +93,12 @@ template/
 
 TODO:
 
+
+
+## Adicionar template na cli
+
+Para adicionar o template na cli é necessario adicionar as informações do repositorio assim como a localização do arquivo de [configuração templates.yaml](../templates.yaml) na raiz desse repsitorio
+
 ## Melhores Práticas
 
 1. **Documentação**: Sempre inclua:

@@ -33,7 +33,16 @@ def main():
         collected_data = ui.collect_template_inputs(template_options)
         template_config = template.encode_input(collected_data)
         console.print(template_config)
-        template.build(template_config, "./output")
+        
+        # Ask for output directory
+        output_dir, success = ui.get_string_option(
+            "Where would you like to generate the template?",
+            default="./output"
+        )
+        if not success:
+            raise KeyboardInterrupt
+        
+        template.build(template_config, output_dir)
     except KeyboardInterrupt:
         console.print("\n[yellow]Process cancelled by user[/yellow]")
         raise typer.Exit(1)
