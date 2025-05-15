@@ -1,6 +1,6 @@
 import json
 from cookiecutter.main import cookiecutter
-from utils.template.abs import TemplateConfig, TemplateClass
+from .abs import TemplateConfig, TemplateClass
 
 class CookiecutterTemplate(TemplateClass):
     def __init__(self, config: TemplateConfig):

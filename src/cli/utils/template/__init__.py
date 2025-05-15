@@ -2,9 +2,9 @@ import os
 import yaml
 import requests
 import base64
-from utils.template.abs import TemplateConfig, TemplateClass
-from utils.template.nix_template import NixTemplate
-from utils.template.cookiecutter import CookiecutterTemplate
+from .abs import TemplateConfig, TemplateClass
+from .nix_template import NixTemplate
+from .cookiecutter import CookiecutterTemplate
 
 # GitHub repo information
 GITHUB_REPO_OWNER = "A3DAndre"

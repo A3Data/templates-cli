@@ -1,6 +1,6 @@
 import subprocess
 from typing import Dict, Any
-from utils.template.abs import TemplateClass
+from .abs import TemplateClass
 
 class NixTemplate(TemplateClass):
     def is_available(self):

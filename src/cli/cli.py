@@ -5,9 +5,9 @@ from rich.panel import Panel
 from rich.traceback import Traceback
 import subprocess
 # Import our modules
-from utils import ui
-from utils.template import get_templates
-from utils.template import TemplateClass
+from .utils import ui
+from .utils.template import get_templates
+from .utils.template import TemplateClass
 
 app = typer.Typer()
 console = Console()
