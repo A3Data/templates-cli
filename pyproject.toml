@@ -18,7 +18,7 @@ dependencies = [
 [tool.poetry.scripts]
 a3t = "cli.cli:app"
 
-[tool.poetry.packages]
+[tool.poetry]
 packages = [
     {include = "cli", from = "src"}
 ]
