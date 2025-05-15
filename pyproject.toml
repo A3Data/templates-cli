@@ -15,8 +15,11 @@ dependencies = [
     "cookiecutter (>=2.6.0,<3.0.0)"
 ]
 
-[project.scripts]
+[tool.poetry.scripts]
 a3t = "cli.cli:app"
+
+[tool.poetry.packages]
+include = ["src/cli"]
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
