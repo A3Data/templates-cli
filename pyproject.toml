@@ -16,7 +16,7 @@ dependencies = [
 ]
 
 [tool.poetry.scripts]
-a3t = "cli.cli:app"
+a3t = "src.cli:app"
 
 [tool.poetry]
 packages = [
