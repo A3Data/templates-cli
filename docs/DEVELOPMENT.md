@@ -1,6 +1,9 @@
 # Guia de Desenvolvimento
 
 ## Estrutura do Projeto
+
+Todo codigo da cli se encontra na pasta src no seguinte formato
+
 ```
 cli/              # Diretório principal do projeto
 ├── cli.py        # Ponto de entrada da aplicação
