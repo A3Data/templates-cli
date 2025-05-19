@@ -42,7 +42,7 @@ class TemplateClass(ABC):
 
     def __str__(self) -> str:
         """Pretty print representation of the template"""
-        url = f"https://github.com/{self.config.organization}/{self.config.repository}?ref={self.config.branch}>"
+        url = f"https://github.com/{self.config.organization}/{self.config.repository}/tree/{self.config.branch}"
         return f"""{self.config.name} - {self.config.description} <{url}>"""
 
     def _fetch_github_file(self, path: str) -> str:
@@ -53,6 +53,9 @@ class TemplateClass(ABC):
             "Accept": "application/vnd.github.v3.raw",
         }
         response = requests.get(url, headers=headers)
+        if response.status_code == 401:
+            raise ValueError("Você não possui acesso a esse repositório ou não esta logado na conta do github. Execute `gh auth login` primeiro.")
+    
         response.raise_for_status()
         
         if not response.text:

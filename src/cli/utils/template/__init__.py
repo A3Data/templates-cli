@@ -23,9 +23,8 @@ def get_github_templates() -> list[TemplateConfig]:
         if response.status_code == 401:
             raise ValueError("Você não possui acesso a esse repositório ou não esta logado na conta do github. Execute `gh auth login` primeiro.")
     
-        if response.status_code != 200:
-            raise ValueError("Failed to fetch templates from GitHub") 
-        
+        response.raise_for_status()
+                
         content = response.json()
         # Decode content from base64
         file_content = base64.b64decode(content["content"]).decode("utf-8")

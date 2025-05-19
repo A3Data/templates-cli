@@ -36,8 +36,8 @@ def main():
         
         # Ask for output directory
         output_dir, success = ui.get_string_option(
-            "Where would you like to generate the template?",
-            default="./output"
+            "Em qual pasta vc gostaria de criar o template?",
+            default="./."
         )
         if not success:
             raise KeyboardInterrupt
