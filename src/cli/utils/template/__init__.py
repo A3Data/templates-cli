@@ -20,6 +20,9 @@ def get_github_templates() -> list[TemplateConfig]:
         url = f"https://api.github.com/repos/{GITHUB_REPO_OWNER}/{GITHUB_REPO_NAME}/contents/{TEMPLATE_FILE_PATH}?ref={GITHUB_BRANCH}"
         response = requests.get(url)
 
+        if response.status_code == 401:
+            raise ValueError("Você não possui acesso a esse repositório ou não esta logado na conta do github. Execute `gh auth login` primeiro.")
+    
         if response.status_code != 200:
             raise ValueError("Failed to fetch templates from GitHub") 
         

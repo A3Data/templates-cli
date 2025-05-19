@@ -1,19 +1,20 @@
+version: 1.0
 templates:
-  - name: batch-cookie
+  - name: batch
     description: Batch processing template
     type: cookiecutter
-    organization: A3DAndre
-    repository: template-batch
-    branch: main
+    organization: A3Data
+    repository: templates-eml
+    branch: batch
     configPath: cookiecutter.yaml
-  - name: lambda-cookie
+  - name: lambda
     description: AWS Lambda template
     type: cookiecutter
-    organization: A3DAndre
-    repository: template-lambda
-    branch: main
+    organization: A3Data
+    repository: templates-eml
+    branch: lambda
     configPath: cookiecutter.yaml
-  - name: buora-cookie
+  - name: buora-old
     description: Buora template
     type: cookiecutter
     organization: A3DAndre
@@ -21,7 +22,7 @@ templates:
     branch: main
     configPath: cookiecutter.yaml
   - name: poc
-    description: Proof of concept project by ME
+    description: Proof of concept nix template
     type: nix
     organization: A3DAndre
     repository: demo

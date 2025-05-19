@@ -10,7 +10,7 @@ from rich.status import Status
 
 # Define color constants
 PRIMARY_COLOR = "yellow"
-SECONDARY_COLOR = "blue"
+SECONDARY_COLOR = "white"
 ACCENT_COLOR = "cyan"
 SEPARATOR_COLOR = "grey70"
 

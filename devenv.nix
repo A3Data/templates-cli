@@ -38,7 +38,7 @@
       echo hello from $GREET
     '';
     cli.exec = ''
-      python cli.py 
+      python -m cli.cli
     '';
   };
 
