@@ -41,7 +41,7 @@ def main():
                 title="Warning",
                 border_style="yellow"
             ))
-            template_config = {}  # or set to a sensible default if needed
+            template_config = "{}"  # or set to a sensible default if needed
 
         # Ask for output directory
         output_dir, success = ui.get_string_option(
