@@ -21,6 +21,13 @@ templates:
     repository: template-buora
     branch: main
     configPath: cookiecutter.yaml
+  - name: buora-rag
+    description: Buora Rag Template
+    type: cookiecutter
+    organization: A3Data
+    repository: buora-oficial-templates
+    branch: main
+    configPath: cookiecutter.yaml
   - name: poc
     description: Proof of concept nix template
     type: nix
