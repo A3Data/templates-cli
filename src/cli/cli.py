@@ -29,11 +29,20 @@ def main():
         templates_data = get_templates()
         template:TemplateClass = ui.choose_item(templates_data, "template")
         assert template.is_available(), "Template is not available"
-        template_options = template.get_template_options()
-        collected_data = ui.collect_template_inputs(template_options)
-        template_config = template.encode_input(collected_data)
-        console.print(template_config)
         
+        try:
+            template_options = template.get_template_options()
+            collected_data = ui.collect_template_inputs(template_options)
+            template_config = template.encode_input(collected_data)
+            console.print(template_config)
+        except Exception as e:
+            console.print(Panel(
+                f"[yellow]Warning: Falha ao carregar informações adicionais.\nSkipping to build step.\nReason: {str(e)}[/yellow]",
+                title="Warning",
+                border_style="yellow"
+            ))
+            template_config = {}  # or set to a sensible default if needed
+
         # Ask for output directory
         output_dir, success = ui.get_string_option(
             "Em qual pasta vc gostaria de criar o template?",
@@ -41,7 +50,7 @@ def main():
         )
         if not success:
             raise KeyboardInterrupt
-        
+
         template.build(template_config, output_dir)
     except KeyboardInterrupt:
         console.print("\n[yellow]Process cancelled by user[/yellow]")
