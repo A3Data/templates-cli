@@ -103,20 +103,10 @@ def get_radio_option(
         tuple[str, bool]: The selected option and whether selection was successful
     """
     try:
-        display_info(prompt, PRIMARY_COLOR)
-        # Convert spaces to underscores for choices
-        choice_map = {opt.replace(" ", "_"): opt for opt in options}
-
-        default_key = default.replace(" ", "_") if default in options else None
-
-        result = Prompt.ask(
-            "",
-            choices=list(choice_map.keys()),
-            default=default_key,
-            show_choices=True,
-            show_default=bool(default),
-        )
-        return choice_map[result], True
+        result = choose_item(options, prompt)
+        
+        
+        return result, True
     except KeyboardInterrupt:
         return "", False
 
