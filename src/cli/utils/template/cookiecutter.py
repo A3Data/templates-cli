@@ -14,9 +14,10 @@ class CookiecutterTemplate(TemplateClass):
         """Build the cookiecutter template"""
         try:
             options = json.loads(config)
+            no_input = options != {}
             cookiecutter(
                 f"gh:{self.config.organization}/{self.config.repository}",
-                no_input=True,
+                no_input=no_input,
                 extra_context=options,
                 output_dir=output_dir,
                 checkout=self.config.branch,
