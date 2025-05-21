@@ -14,13 +14,13 @@ templates:
     repository: templates-eml
     branch: lambda
     configPath: cookiecutter.yaml
-  - name: buora-old
-    description: Buora template
-    type: cookiecutter
-    organization: A3DAndre
-    repository: template-buora
-    branch: main
-    configPath: cookiecutter.yaml
+  # - name: buora-old
+  #   description: Buora template
+  #   type: cookiecutter
+  #   organization: A3DAndre
+  #   repository: template-buora
+  #   branch: main
+  #   configPath: cookiecutter.yaml
   - name: buora-teste
     description: Buora template
     type: cookiecutter
@@ -28,8 +28,8 @@ templates:
     repository: buora-teste
     branch: main
     configPath: config.yaml
-  - name: buora-cookie
-    description: Buora Rag Template
+  - name: buora-oficial
+    description: Buora Oficial Templates
     type: cookiecutter
     organization: A3Data
     repository: buora-oficial-templates
