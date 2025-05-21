@@ -37,7 +37,7 @@ def main():
             console.print(template_config)
         except Exception as e:
             console.print(Panel(
-                f"[yellow]Warning: Falha ao carregar informações adicionais.\nSkipping to build step.\nReason: {str(e)}[/yellow]",
+                f"[yellow]Warning: Falha ao carregar informações adicionais.\nA engine do template será responsavel por criar o template.", # \nReason: {str(e)}[/yellow]
                 title="Warning",
                 border_style="yellow"
             ))

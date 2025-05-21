@@ -35,11 +35,11 @@ templates:
     repository: buora-oficial-templates
     branch: main
     configPath: cookiecutter.yaml
-  - name: buora-infra
+  - name: buora_infra
     description: Buora Oficial Infra
     type: cookiecutter
     organization: A3Data
-    repository: buora-infra
+    repository: buora_infra
     branch: template/cookiecutter
     configPath: cookiecutter.yaml
   - name: poc
