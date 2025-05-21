@@ -35,6 +35,13 @@ templates:
     repository: buora-oficial-templates
     branch: main
     configPath: cookiecutter.yaml
+  - name: buora-infra
+    description: Buora Oficial Infra
+    type: cookiecutter
+    organization: A3Data
+    repository: buora-infra
+    branch: template/cookiecutter
+    configPath: cookiecutter.yaml
   - name: poc
     description: Proof of concept nix template
     type: nix
