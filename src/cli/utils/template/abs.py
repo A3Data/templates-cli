@@ -78,11 +78,6 @@ class TemplateClass(ABC):
         """Encodes the collected data into a format suitable for the template engine"""
         pass
 
-    # @abstractmethod
-    # def display_summary(self, collected_data: Dict[str, Any]) -> bool:
-    #     """Display a summary of the collected data"""
-    #     pass
-
     @abstractmethod
     def build(self, config: str, output_dir: str) -> None:
         """Build the template and create it in the specified directory"""

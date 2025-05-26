@@ -36,11 +36,11 @@ def main():
             template_config = template.encode_input(collected_data)
             console.print(template_config)
         except Exception as e:
-            console.print(Panel(
-                f"[yellow]Warning: Falha ao carregar informações adicionais.\nA engine do template será responsavel por criar o template.", # \nReason: {str(e)}[/yellow]
-                title="Warning",
-                border_style="yellow"
-            ))
+            # console.print(Panel(
+            #     f"[yellow]Warning: Falha ao carregar informações adicionais.\nA engine do template será responsavel por criar o template.", # \nReason: {str(e)}[/yellow]
+            #     title="Warning",
+            #     border_style="yellow"
+            # ))
             template_config = "{}"  # or set to a sensible default if needed
 
         # Ask for output directory
