@@ -35,3 +35,10 @@ templates:
     repository: data-infrastructure
     branch: cookiecutter
     configPath: cookiecutter.yaml
+  - name: ubq-data-image
+    description: Ubique Data Infra
+    type: cookiecutter
+    organization: A3Data
+    repository: data-image
+    branch: cookiecutteer
+    configPath: cookiecutter.yaml
