@@ -14,20 +14,6 @@ templates:
     repository: templates-eml
     branch: lambda
     configPath: cookiecutter.yaml
-  # - name: buora-old
-  #   description: Buora template
-  #   type: cookiecutter
-  #   organization: A3DAndre
-  #   repository: template-buora
-  #   branch: main
-  #   configPath: cookiecutter.yaml
-  - name: buora-teste
-    description: Buora template
-    type: cookiecutter
-    organization: A3DAndre
-    repository: buora-teste
-    branch: main
-    configPath: config.yaml
   - name: buora-oficial
     description: Buora Oficial Templates
     type: cookiecutter
@@ -42,17 +28,10 @@ templates:
     repository: buora_infra
     branch: template/cookiecutter
     configPath: cookiecutter.yaml
-  - name: poc
-    description: Proof of concept nix template
-    type: nix
-    organization: A3DAndre
-    repository: demo
-    branch: main
-    configPath: templates/poc/config.yaml
-  # - name: batch
-  #   description: Nix template for batch
-  #   type: nix
-  #   organization: A3DAndre
-  #   repository: demo
-  #   branch: main
-  #   configPath: templates/batch/config.yaml
+  - name: ubq-data-infra
+    description: Ubique Data Infra
+    type: cookiecutter
+    organization: A3Data
+    repository: data-infrastructure
+    branch: cookiecutter
+    configPath: cookiecutter.yaml
