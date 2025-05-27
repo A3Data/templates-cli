@@ -36,14 +36,14 @@ templates:
     branch: cookiecutter
     configPath: cookiecutter.yaml
   - name: ubq-data-image
-    description: Ubique Data Infra
+    description: Ubique Data Image 
     type: cookiecutter
     organization: A3Data
     repository: data-image
     branch: cookiecutteer
     configPath: cookiecutter.yaml
   - name: ubq-data-pipeline
-    description: Ubique Data Infra
+    description: Ubique Data Pipeline
     type: cookiecutter
     organization: A3Data
     repository: data-pipeline
