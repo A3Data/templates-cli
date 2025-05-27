@@ -9,9 +9,9 @@ from .cookiecutter import CookiecutterTemplate
 # GitHub repo information
 GITHUB_REPO_OWNER = "A3Data"
 GITHUB_REPO_NAME = "templates-cli"
-GITHUB_BRANCH = "main"  # Default branch
+GITHUB_BRANCH = "main"  
 TEMPLATE_FILE_PATH = "templates.yaml"  
-VERSION = 1.0  # Default version
+CLI_VERSION = 1.0  
 def get_github_templates() -> list[TemplateConfig]:
     """Fetch templates from GitHub repository"""
     try:
@@ -33,9 +33,9 @@ def get_github_templates() -> list[TemplateConfig]:
         data = yaml.safe_load(file_content)
         
         version = data.get("version", "1.0")
-        if version != VERSION:
+        if version != CLI_VERSION:
             print(f"Warning: Uma nova versão da CLI foi encontrada.")
-            print(f"Versão atual: {VERSION}, Versão disponível: {version}")
+            print(f"Versão atual: {CLI_VERSION}, Versão disponível: {version}")
             print("Considere atualizar a CLI para obter as últimas melhorias e correções de bugs.")
             print("Use `pip install git+https://github.com/A3Data/templates-cli.git` to update.")
 

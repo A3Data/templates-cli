@@ -25,7 +25,8 @@ def main():
 """
     try:
         console.print(title)
-        ui.display_header("Um gerador de templates para acelerar o eu.A3")
+        ui.display_header("Um gerador de templates para acelerar o eu.A3 para sugestões e melhorias, abra uma issue no repositório da CLI, ou do template especifico.")
+        console.print("[bold] GitHub:[/bold] https://github.com/A3Data/templates-cli/issues")
         # Get available templates with a spinner
         templates_data = get_templates()
         template:TemplateClass = ui.choose_item(templates_data, "template")
