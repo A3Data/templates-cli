@@ -11,39 +11,13 @@ pip install git+https://github.com/A3Data/templates-cli.git
 ## Templates Disponíveis
 
 Abaixo estão os templates atualmente suportados pela CLI, conforme configurado no arquivo templates.yaml:
-
-### Templates Cookiecutter
-
-1. batch-cookie  
-   Descrição: Template para processamento em batch.  
-   Organização: A3DAndre  
-   Repositório: template-batch  
-   Branch: main  
-   Caminho de Configuração: cookiecutter.yaml  
-
-2. lambda-cookie  
-   Descrição: Template para projetos AWS Lambda.  
-   Organização: A3DAndre  
-   Repositório: template-lambda  
-   Branch: main  
-   Caminho de Configuração: cookiecutter.yaml  
-
-3. buora-cookie  
-   Descrição: Template para projetos Buora.  
-   Organização: A3DAndre  
-   Repositório: template-buora  
-   Branch: main  
-   Caminho de Configuração: cookiecutter.yaml  
-
-### Templates Nix
-
-1. poc  
-   Descrição: Template para projetos de prova de conceito (Proof of Concept).  
-   Organização: A3DAndre  
-   Repositório: demo  
-   Branch: main  
-   Caminho de Configuração: templates/poc/config.yaml  
-
+1. batch - Batch processing template <https://github.com/A3Data/templates-eml/tree/batch>
+2. lambda - AWS Lambda template <https://github.com/A3Data/templates-eml/tree/lambda>
+3. buora-oficial - Buora Oficial Templates <https://github.com/A3Data/buora-oficial-templates/tree/main>
+4. buora_infra - Buora Oficial Infra <https://github.com/A3Data/buora_infra/tree/template/cookiecutter>
+5. ubq-data-infra - Ubique Data Infra <https://github.com/A3Data/data-infrastructure/tree/cookiecutter>
+6. ubq-data-image - Ubique Data Image <https://github.com/A3Data/data-image/tree/cookiecutteer>
+7. ubq-data-pipeline - Ubique Data Pipeline <https://github.com/A3Data/data-pipeline/tree/cookiecutter>
 ## Como Usar
 
 Após instalar a CLI, você pode executar o comando principal para iniciar a ferramenta:
