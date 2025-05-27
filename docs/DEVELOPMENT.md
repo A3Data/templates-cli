@@ -43,6 +43,18 @@ O arquivo `devenv.nix` já está configurado com:
 - Pre-commit hooks (ruff e ruff-format)
 - Pacotes necessários (git, python, poetry, ...)
 
+
+Rodando a cli localmente
+```bash
+python -m src.cli.cli
+```
+
+Ou atravez do atalho do devenv
+```bash
+cli
+```
+
+
 ### Usando Poetry (Alternativa)
 
 Se preferir não usar o devenv, você pode usar o Poetry diretamente:

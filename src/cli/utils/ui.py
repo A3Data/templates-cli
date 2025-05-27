@@ -83,7 +83,7 @@ def get_string_option(
             if validate is None or validate(value):
                 return value, True
 
-            display_error("Invalid input, please try again")
+            display_error("Input Invalido tente novamente.")
 
     except KeyboardInterrupt:
         return "", False
@@ -254,7 +254,7 @@ def display_format_markdown(markdown_text: str) -> None:
 
 def choose_item(items: list[Any], item_name: str = "item") -> Any:
     """Prompt the user to choose an item from the list"""
-    display_header(f"Available {item_name.capitalize()}s")
+    display_header(f"{item_name.capitalize()}s Disponiveis")
 
     # Display items with index
     for idx, item in enumerate(items, 1):
@@ -277,7 +277,7 @@ def choose_item(items: list[Any], item_name: str = "item") -> Any:
                 return selected_item
             else:
                 display_error(
-                    f"Please enter a number between 1 and {len(items)}"
+                    f"Digite um numero entre 1 e {len(items)}"
                 )
         except ValueError:
-            display_error("Please enter a valid number")
+            display_error("Digite um numero valido")

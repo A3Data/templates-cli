@@ -6,7 +6,7 @@ Este projeto é uma ferramenta de linha de comando (CLI) para geração de templ
 
 Para instalar a CLI, execute o seguinte comando:
 ```bash
-pip install git+https://github.com/A3DAndre/templates-cli.git
+pip install git+https://github.com/A3Data/templates-cli.git
 ```
 ## Templates Disponíveis
 

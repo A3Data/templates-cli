@@ -24,6 +24,8 @@ Atualmente, o sistema suporta dois tipos de construtores de templates:
 
 Um arquivo .yaml será usado para configurar o template, ele deve seguir o seguinte formato:
 
+Se vc estiver utilizando o cookiecutter esse arquivo é opcional e as perguntas poderam ser geradas pelo proprio cookiecutter.
+
 ```yaml
 stringOptionName:
   type: string

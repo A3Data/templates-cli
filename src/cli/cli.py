@@ -25,10 +25,11 @@ def main():
 """
     try:
         console.print(title)
+        ui.display_header("Um gerador de templates para acelerar o eu.A3")
         # Get available templates with a spinner
         templates_data = get_templates()
         template:TemplateClass = ui.choose_item(templates_data, "template")
-        assert template.is_available(), "Template is not available"
+        assert template.is_available(), "Template não disponível ou não encontrado."
         
         try:
             template_options = template.get_template_options()
@@ -61,6 +62,8 @@ def main():
             title="Error",
             border_style="red"
         ))
+        ui.display_header("Para relatar um bug, por favor, abra uma issue no repositório do GitHub.")
+        console.print("[bold]Repositório do GitHub:[/bold] https://github.com/A3Data/templates-cli/issues")
         # Print detailed traceback in debug mode
         # console.print(Traceback(), soft_wrap=True)
         raise typer.Exit(1)
