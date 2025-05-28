@@ -11,7 +11,7 @@ GITHUB_REPO_OWNER = "A3Data"
 GITHUB_REPO_NAME = "templates-cli"
 GITHUB_BRANCH = "main"  
 TEMPLATE_FILE_PATH = "templates.yaml"  
-CLI_VERSION = 0.9  
+CLI_VERSION = 0.1 
 def get_github_templates() -> list[TemplateConfig]:
     """Fetch templates from GitHub repository"""
     try:
@@ -32,12 +32,14 @@ def get_github_templates() -> list[TemplateConfig]:
         # Parse YAML content
         data = yaml.safe_load(file_content)
         
-        version = data.get("version", "1.0")
+        version = data.get("version",None)
         if version != CLI_VERSION:
-            print(f"Warning: Uma nova versão da CLI foi encontrada.")
-            print(f"Versão atual: {CLI_VERSION}, Versão disponível: {version}")
-            print("Considere atualizar a CLI para obter as últimas melhorias e correções de bugs.")
-            print("Use `pip install git+https://github.com/A3Data/templates-cli.git` to update.")
+            RED = "\033[91m"
+            RESET = "\033[0m"
+            print(f"{RED}Warning: Uma nova versão da CLI foi encontrada.{RESET}")
+            print(f"{RED}Versão atual: {CLI_VERSION}, Versão disponível: {version}{RESET}")
+            print(f"{RED}Considere atualizar a CLI para obter as últimas melhorias e correções de bugs.{RESET}")
+            print(f"{RED}Use `pip install git+https://github.com/A3Data/templates-cli.git` to update.{RESET}")
 
         template_configs = data.get("templates", [])
         templates = [

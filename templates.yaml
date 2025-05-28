@@ -1,13 +1,13 @@
-version: 1.0
+version: 0.1
 templates:
-  - name: batch
+  - name: eml-batch
     description: Batch processing template
     type: cookiecutter
     organization: A3Data
     repository: templates-eml
     branch: batch
     configPath: cookiecutter.yaml
-  - name: lambda
+  - name: eml-lambda
     description: AWS Lambda template
     type: cookiecutter
     organization: A3Data
