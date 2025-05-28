@@ -74,36 +74,6 @@ poetry install
 poetry shell
 ```
 
-## Desenvolvimento
-
-### Comandos Úteis
-
-- Executar testes:
-```bash
-poetry run pytest
-```
-
-- Formatar código:
-```bash
-poetry run ruff format .
-```
-
-- Verificar qualidade do código:
-```bash
-poetry run ruff check .
-```
-
-### Pre-commit Hooks (não necessario se estiver utilizando o devenv)
-O projeto usa pre-commit hooks para garantir qualidade do código. Para instalar:
-
-```bash
-pre-commit install
-```
-
-Os hooks configurados incluem:
-- ruff: para linting
-- ruff-format: para formatação
-
 ## Templates
 
 Para criar novos templates, consulte o arquivo [CREATING_TEMPLATES.md](CREATING_TEMPLATES.md).
