@@ -9,7 +9,7 @@ from rich.prompt import Prompt, Confirm
 from rich.status import Status
 
 # Define color constants
-PRIMARY_COLOR = "yellow"
+PRIMARY_COLOR = "blue"
 SECONDARY_COLOR = "white"
 ACCENT_COLOR = "cyan"
 SEPARATOR_COLOR = "grey70"
