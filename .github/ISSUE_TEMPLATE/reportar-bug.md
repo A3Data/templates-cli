@@ -1,5 +1,5 @@
 ---
-name: Bug report
+name: Reportar Bug
 about: 'Reporte um bug e nos ajude a melhorar '
 title: "[BUG]"
 labels: ''
