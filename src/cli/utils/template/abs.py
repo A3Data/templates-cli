@@ -41,9 +41,13 @@ class TemplateClass(ABC):
         self.config = config
 
     def __str__(self) -> str:
-        """Pretty print representation of the template"""
+        """Pretty print representation of the template using rich markup"""
         url = f"https://github.com/{self.config.organization}/{self.config.repository}/tree/{self.config.branch}"
-        return f"""{self.config.name} - {self.config.description} <{url}>"""
+        return (
+            f"[green]{self.config.name}[/green] - "
+            f"[cyan]{self.config.description}[/cyan] "
+            f"<[yellow]{url}[/yellow]>"
+        )
 
     def _fetch_github_file(self, path: str) -> str:
         """Helper method to fetch files from GitHub"""
