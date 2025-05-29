@@ -39,7 +39,7 @@ def get_github_templates() -> list[TemplateConfig]:
             print(f"{RED}Warning: Uma nova versão da CLI foi encontrada.{RESET}")
             print(f"{RED}Versão atual: {CLI_VERSION}, Versão disponível: {version}{RESET}")
             print(f"{RED}Considere atualizar a CLI para obter as últimas melhorias e correções de bugs.{RESET}")
-            print(f"{RED}Use `pip install git+https://github.com/A3Data/templates-cli.git` to update.{RESET}")
+            print(f"{RED}Use `pip install git+https://github.com/A3Data/templates-cli.git --upgrade` to update.{RESET}")
 
         template_configs = data.get("templates", [])
         templates = [
