@@ -11,7 +11,7 @@ GITHUB_REPO_OWNER = "A3Data"
 GITHUB_REPO_NAME = "templates-cli"
 GITHUB_BRANCH = "main"  
 TEMPLATE_FILE_PATH = "templates.yaml"  
-CLI_VERSION = 0.2
+CLI_VERSION = 0.4
 def get_github_templates() -> list[TemplateConfig]:
     """Fetch templates from GitHub repository"""
     try:

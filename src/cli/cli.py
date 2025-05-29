@@ -3,7 +3,7 @@ import typer
 from rich.console import Console
 from rich.panel import Panel
 from rich.traceback import Traceback
-import subprocess
+import os
 # Import our modules
 from .utils import ui
 from .utils.template import get_templates
@@ -50,9 +50,10 @@ def main():
 
         # Ask for output directory
         output_dir, success = ui.get_string_option(
-            "Em qual pasta vc gostaria de criar o template?",
+            "Em qual pasta vc gostaria de criar o template? (Pressione Enter para usar a pasta atual)",
             default="./."
         )
+        console.print(f"[bold]O template será criado na pasta:[/bold] { os.path.abspath(output_dir) }")
         if not success:
             raise KeyboardInterrupt
 
