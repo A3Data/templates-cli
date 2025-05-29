@@ -19,18 +19,23 @@ class TemplateConfig:
     configPath: str = "config.yaml"
 
 
+class GitHubAuthError(Exception):
+    """Custom exception for GitHub authentication errors"""
+    pass
+
+
 def token_github() -> str:
     gh_config_path = os.path.expanduser("~/.config/gh/hosts.yml")
 
     if not os.path.exists(gh_config_path):
-        raise typer.BadParameter("Execute `gh auth login` primeiro.")
+        raise GitHubAuthError("Execute `gh auth login` primeiro.")
 
     with open(gh_config_path, "r") as file:
         config = yaml.safe_load(file)
 
     github_info = config.get("github.com")
     if not github_info or "oauth_token" not in github_info:
-        raise typer.BadParameter("Token OAuth não encontrado.")
+        raise GitHubAuthError("Token OAuth não encontrado. Execute `gh auth login` primeiro.")
     return github_info["oauth_token"]
 
 
@@ -58,7 +63,7 @@ class TemplateClass(ABC):
         }
         response = requests.get(url, headers=headers)
         if response.status_code == 401:
-            raise ValueError("Você não possui acesso a esse repositório ou não esta logado na conta do github. Execute `gh auth login` primeiro.")
+            raise GitHubAuthError("Você não possui acesso a esse repositório ou não esta logado na conta do github. Execute `gh auth login` primeiro.")
     
         response.raise_for_status()
         

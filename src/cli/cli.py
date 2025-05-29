@@ -8,8 +8,9 @@ import subprocess
 from .utils import ui
 from .utils.template import get_templates
 from .utils.template import TemplateClass
+from .utils.template.abs import GitHubAuthError
 
-app = typer.Typer()
+app = typer.Typer(help="A CLI tool to generate templates for A3 Data projects. Utilize o comando 'a3t' para gerar templates de projetos da A3 Data.")
 console = Console()
 
 @app.command()
@@ -31,12 +32,14 @@ def main():
         templates_data = get_templates()
         template:TemplateClass = ui.choose_item(templates_data, "template")
         assert template.is_available(), "Template não disponível ou não encontrado."
-        
+
         try:
             template_options = template.get_template_options()
             collected_data = ui.collect_template_inputs(template_options)
             template_config = template.encode_input(collected_data)
             console.print(template_config)
+        except GitHubAuthError as e:
+            raise  # Let the outer except handle it (or customize if you want)
         except Exception as e:
             # console.print(Panel(
             #     f"[yellow]Warning: Falha ao carregar informações adicionais.\nA engine do template será responsavel por criar o template.", # \nReason: {str(e)}[/yellow]
