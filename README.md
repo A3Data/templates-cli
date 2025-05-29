@@ -8,6 +8,22 @@ Para instalar a CLI, execute o seguinte comando:
 ```bash
 pip install git+https://github.com/A3Data/templates-cli.git
 ```
+
+## Autenticação no GitHub
+
+Para acessar repositórios privados de templates, é necessário autenticar-se no GitHub. Recomenda-se utilizar o [GitHub CLI (`gh`)](https://cli.github.com/):
+
+No ubunto vc pode instalar pelo apt
+
+```bash
+sudo apt install gh
+```
+```bash
+gh auth login
+```
+
+Siga as instruções para autenticar sua conta. Após isso, a CLI poderá acessar os repositórios necessários.
+
 ## Templates Disponíveis
 
 Abaixo estão os templates atualmente suportados pela CLI, conforme configurado no arquivo templates.yaml:
