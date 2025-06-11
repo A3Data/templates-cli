@@ -1,0 +1,68 @@
+{
+  "version": "0.4",
+  "templates": [
+    {
+      "name": "eml-batch",
+      "description": "Batch processing template",
+      "type": "cookiecutter",
+      "organization": "A3Data",
+      "repository": "templates-eml",
+      "branch": "batch",
+      "configPath": "cookiecutter.yaml"
+    },
+    {
+      "name": "eml-lambda",
+      "description": "AWS Lambda template",
+      "type": "cookiecutter",
+      "organization": "A3Data",
+      "repository": "templates-eml",
+      "branch": "lambda",
+      "configPath": "cookiecutter.yaml"
+    },
+    {
+      "name": "buora-oficial",
+      "description": "Buora Oficial Templates",
+      "type": "cookiecutter",
+      "organization": "A3Data",
+      "repository": "buora-oficial-templates",
+      "branch": "main",
+      "configPath": "cookiecutter.yaml"
+    },
+    {
+      "name": "buora_infra",
+      "description": "Buora Oficial Infra",
+      "type": "cookiecutter",
+      "organization": "A3Data",
+      "repository": "buora_infra",
+      "branch": "template/cookiecutter",
+      "configPath": "cookiecutter.yaml"
+    },
+    {
+      "name": "ubq-data-infra",
+      "description": "Ubique Data Infra",
+      "type": "cookiecutter",
+      "organization": "A3Data",
+      "repository": "data-infrastructure",
+      "branch": "cookiecutter",
+      "configPath": "cookiecutter.yaml"
+    },
+    {
+      "name": "ubq-data-image",
+      "description": "Ubique Data Image",
+      "type": "cookiecutter",
+      "organization": "A3Data",
+      "repository": "data-image",
+      "branch": "cookiecutteer",
+      "configPath": "cookiecutter.yaml"
+    },
+    {
+      "name": "ubq-data-pipeline",
+      "description": "Ubique Data Pipeline",
+      "type": "cookiecutter",
+      "organization": "A3Data",
+      "repository": "data-pipeline",
+      "branch": "cookiecutter",
+      "configPath": "cookiecutter.yaml"
+    }
+  ]
+}
