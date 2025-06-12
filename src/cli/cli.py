@@ -9,7 +9,7 @@ from .utils import ui
 from .utils.template import get_templates
 from .utils.template import TemplateClass
 from .utils.template.abs import GitHubAuthError
-
+from .utils.telemetry import send_telemetry
 app = typer.Typer(help="A CLI tool to generate templates for A3 Data projects. Utilize o comando 'a3t' para gerar templates de projetos da A3 Data.")
 console = Console()
 
@@ -33,6 +33,13 @@ def main():
         template:TemplateClass = ui.choose_item(templates_data, "template")
         assert template.is_available(), "Template não disponível ou não encontrado."
 
+        send_telemetry(template.config.name, 
+                       metadata={
+                            "organization": template.config.organization,
+                            "repository": template.config.repository,
+                            "branch": template.config.branch
+                        }, 
+                       code="SELECTED_TEMPLATE")
         try:
             template_options = template.get_template_options()
             collected_data = ui.collect_template_inputs(template_options)
@@ -58,10 +65,27 @@ def main():
             raise KeyboardInterrupt
 
         template.build(template_config, output_dir)
+        
+        send_telemetry(template.config.name,
+                       metadata={
+                            "organization": template.config.organization,
+                            "repository": template.config.repository,
+                            "branch": template.config.branch
+                        }, 
+                       code="TEMPLATE_GENERATED")
     except KeyboardInterrupt:
         console.print("\n[yellow]Process cancelled by user[/yellow]")
         raise typer.Exit(1)
     except Exception as e:
+        
+        send_telemetry(template.config.name, 
+                       metadata={
+                            "organization": template.config.organization,
+                            "repository": template.config.repository,
+                            "branch": template.config.branch,
+                            "error": str(e)
+                        }, 
+                       code="ERROR_GENERATING_TEMPLATE")
         console.print(Panel(
             f"[red]Error while generating template:[/red]\n{str(e)}",
             title="Error",
