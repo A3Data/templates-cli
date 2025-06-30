@@ -1,6 +1,6 @@
 [project]
 name = "cli-a3-templates"
-version = "0.1.5"
+version = "0.1.6"
 description = "A CLI tool for generating templates"
 authors = [
     {name = "André Brandão",email = "andre.brandao@a3data.com.br"}

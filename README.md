@@ -9,11 +9,16 @@ Para instalar a CLI, execute o seguinte comando:
 pip install git+https://github.com/A3Data/templates-cli.git
 ```
 
+Também é possível executar a CLI diretamente utilizando
+```bash
+pipx run --spec git+https://github.com/A3Data/templates-cli a3t
+```
+
 ## Autenticação no GitHub
 
 Para acessar repositórios privados de templates, é necessário autenticar-se no GitHub. Recomenda-se utilizar o [GitHub CLI (`gh`)](https://cli.github.com/):
 
-No ubunto vc pode instalar pelo apt
+No Ubuntu vc pode instalar pelo apt
 
 ```bash
 sudo apt install gh
