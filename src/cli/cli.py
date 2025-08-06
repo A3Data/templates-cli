@@ -53,39 +53,69 @@ def build_template(
     if not template.is_available():
         console.print(f"[red]Template não disponível ou não encontrado.[/red]")
         raise typer.Exit(1)
+    
+    
+    
     try:
         template_options = template.get_template_options()
-        if options:
-            collected_data = json.loads(options)
-        else:
-            collected_data = ui.collect_template_inputs(template_options)
+        collected_data = ui.collect_template_inputs(template_options)
         template_config = template.encode_input(collected_data)
-        if json_output:
-            console.print(json.dumps(template_config, indent=2))
-        else:
-            console.print(template_config)
+        console.print(template_config)
+    except GitHubAuthError as e:
+        raise  # Let the outer except handle it (or customize if you want)
+    except Exception as e:
+        # console.print(Panel(
+        #     f"[yellow]Warning: Falha ao carregar informações adicionais.\nA engine do template será responsavel por criar o template.", # \nReason: {str(e)}[/yellow]
+        #     title="Warning",
+        #     border_style="yellow"
+        # ))
+        template_config = "{}"  # or set to a sensible default if needed
+    
+    
+    try:
+    
         output_dir, success = ui.get_string_option(
-            "Em qual pasta vc gostaria de criar o template? (Pressione Enter para usar a pasta atual)",
-            default="./."
-        )
+                "Em qual pasta vc gostaria de criar o template? (Pressione Enter para usar a pasta atual)",
+                default="./."
+            )
         console.print(f"[bold]O template será criado na pasta:[/bold] { os.path.abspath(output_dir) }")
         if not success:
             raise KeyboardInterrupt
+
         template.build(template_config, output_dir)
+        
         send_telemetry(template.config.name,
-                       metadata={
+                        metadata={
                             "organization": template.config.organization,
                             "repository": template.config.repository,
                             "branch": template.config.branch
                         }, 
-                       code="TEMPLATE_GENERATED")
+                        code="TEMPLATE_GENERATED")
+        
+    except KeyboardInterrupt:
+        console.print("\n[yellow]Process cancelled by user[/yellow]")
+        raise typer.Exit(1)
     except Exception as e:
+        
+        send_telemetry(template.config.name, 
+                       metadata={
+                            "organization": template.config.organization,
+                            "repository": template.config.repository,
+                            "branch": template.config.branch,
+                            "error": str(e)
+                        }, 
+                       code="ERROR_GENERATING_TEMPLATE")
         console.print(Panel(
             f"[red]Error while generating template:[/red]\n{str(e)}",
             title="Error",
             border_style="red"
         ))
+        ui.display_header("Para relatar um bug, por favor, abra uma issue no repositório do GitHub.")
+        console.print("[bold]Repositório do GitHub:[/bold] https://github.com/A3Data/templates-cli/issues")
+        # Print detailed traceback in debug mode
+        # console.print(Traceback(), soft_wrap=True)
         raise typer.Exit(1)
+
 
 @app.callback(invoke_without_command=True)
 def main(ctx: typer.Context):
