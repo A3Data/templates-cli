@@ -14,7 +14,7 @@ TEMPLATE_FILE_PATH = "templates.yaml"
 CLI_VERSION = 0.6
 
 
-USE_LOCAL=True
+USE_LOCAL=False
 
 
 def get_local_templates() -> list[TemplateConfig]:
