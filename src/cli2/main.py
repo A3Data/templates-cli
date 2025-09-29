@@ -26,7 +26,7 @@ def list_templates(
     """List available templates."""
     templates_data = get_templates()
     if json_output:
-        output = [str(t) for t in templates_data]
+        output = [t.config.__dict__ for t in templates_data]
         console.print(json.dumps(output, indent=2))
     else:
         ui.display_header("Templates disponíveis:")
