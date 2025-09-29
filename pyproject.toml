@@ -21,7 +21,7 @@ a3t2 = "cli2.main:app"
 
 [tool.poetry]
 packages = [
-    {include = "cli", from = "src"}
+    {include = "cli", from = "src"},
     {include = "cli2", from = "src"}
 ]
 
