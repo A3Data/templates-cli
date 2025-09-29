@@ -49,3 +49,10 @@ templates:
     repository: data-pipeline
     branch: cookiecutter
     configPath: cookiecutter.yaml
+  - name: n8n-custom-node
+    description: N8N Custom Node Template
+    type: git_repo
+    organization: A3DAndre
+    repository: n8nnode
+    branch: master
+    configPath: 
