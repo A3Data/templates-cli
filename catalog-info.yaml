@@ -1,24 +1,24 @@
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
-	name: templates-cli
-	title: templates-cli
-	description: "CLI para geração de templates — ferramenta para gerar projetos a partir de Cookiecutter templates."
-	annotations:
-		github.com/project-slug: "A3Data/templates-cli"
-		github.com/repo: "https://github.com/A3Data/templates-cli"
-		backstage.io/techdocs-ref: "url:https://github.com/A3Data/templates-cli/blob/main/docs"
-	tags:
-		- cli
-		- python
-		- cookiecutter
+  name: templates-cli
+  title: templates-cli
+  description: "CLI para geração de templates — ferramenta para gerar projetos a partir de Cookiecutter templates."
+  annotations:
+    github.com/project-slug: "A3Data/templates-cli"
+    github.com/repo: "https://github.com/A3Data/templates-cli"
+    backstage.io/techdocs-ref: "url:https://github.com/A3Data/templates-cli/blob/main/docs"
+  tags:
+    - cli
+    - python
+    - cookiecutter
 
 spec:
-	type: tool
-	lifecycle: production
-	owner: team/a3data
-	system: delivery-way
-	repoUrl: https://github.com/A3Data/templates-cli
-	providesApis: []
-	consumesApis: []
+  type: tool
+  lifecycle: production
+  owner: team/a3data
+  system: delivery-way
+  repoUrl: https://github.com/A3Data/templates-cli
+  providesApis: []
+  consumesApis: []
 
