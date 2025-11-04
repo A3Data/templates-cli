@@ -7,7 +7,7 @@ metadata:
   annotations:
     github.com/project-slug: "A3Data/templates-cli"
     github.com/repo: "https://github.com/A3Data/templates-cli"
-    backstage.io/techdocs-ref: "url:https://github.com/A3Data/templates-cli/blob/main/docs"
+    backstage.io/techdocs-ref: "dir:."
   tags:
     - cli
     - python
