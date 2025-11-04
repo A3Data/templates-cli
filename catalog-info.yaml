@@ -17,7 +17,7 @@ spec:
 	type: tool
 	lifecycle: production
 	owner: team/a3data
-	system: a3data-platform
+	system: delivery-way
 	repoUrl: https://github.com/A3Data/templates-cli
 	providesApis: []
 	consumesApis: []
