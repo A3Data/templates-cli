@@ -15,7 +15,7 @@ metadata:
 
 spec:
   type: tool
-  lifecycle: production
+  lifecycle: deprecated
   owner: group:default/solucoes-e-inovacao
   system: delivery-way
   repoUrl: https://github.com/A3Data/templates-cli
